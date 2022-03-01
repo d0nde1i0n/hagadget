@@ -1,24 +1,41 @@
-# README
+#ハガジェット
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##サイト概要
+様々なユーザとガジェットを使用した感想等を共有できるサイト。
 
-Things you may want to cover:
+### サイトテーマ
+使用したガジェットの評価をシェアする。
 
-* Ruby version
+### テーマを選んだ理由
+私は今まで見たことのないような斬新な機能を持ち、仕事や学習環境を改善できる.
+ガジェットを手に取ったり、探すことが好きです。
+現在、特定の企業・個人がガジェットの情報を発信する場はありますが、
+一般ユーザ同士がガジェットについて意見交換可能な場は少ないです。
+それならば、ガジェットの操作感等の意見交換ができる場を作れば、
+ユーザが欲しいと思えるガジェットに出会えると考え、このテーマにしました。
 
-* System dependencies
+### ターゲットユーザ
+メインターゲットは新しいものや、ガジェットが好きでガジェットについて意見交換したい人。
+上記の他に働いている人で自分の仕事環境を改善するようなガジェットを探している人。
 
-* Configuration
+### 主な利用シーン
+自分が使用したガジェットの評価を投稿したいときや、自分の用途にあったガジェットを探している人など。
 
-* Database creation
 
-* Database initialization
+## 設計書
+後日記載予定
 
-* How to run the test suite
+## チャレンジ要素一覧
+https://docs.google.com/spreadsheets/d/1c27D3fFXtJfsvNfwr5SrzBJtwBF5zplWsIZUKu5p57k/edit?usp=sharing
 
-* Services (job queues, cache servers, search engines, etc.)
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery,Bootstrap
+- IDE：Cloud9
 
-* Deployment instructions
-
-* ...
+## 使用素材(予定)
+- Font FREE(https://fontfree.me/)
+- O-DAN(https://o-dan.net/ja/)
+- fontawesome(https://fontawesome.com/)
