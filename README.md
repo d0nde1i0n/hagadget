@@ -32,7 +32,7 @@
 
 
 ## 設計書
-- UI-Flow
+- UI-Flow:
 https://drive.google.com/file/d/110eaq3ZVcCKC2YwdI0iT_C6ggAJzSMfe/view?usp=sharing
 
 ## チャレンジ要素一覧
