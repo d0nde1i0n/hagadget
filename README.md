@@ -33,9 +33,9 @@
 
 ## 設計書
 - UI-Flow:
-https://drive.google.com/file/d/110eaq3ZVcCKC2YwdI0iT_C6ggAJzSMfe/view?usp=sharing
+https://drive.google.com/file/d/1ZRHOsvGFLrY4yESAUVQsrAoP0G-fDyRT/view?usp=sharing
 - Wire Frame:
-https://drive.google.com/file/d/1JaeXQOVZ8R_sB0S4oNFbnPr7zbIunW70/view?usp=sharing
+https://drive.google.com/file/d/1YsjFw54lJz1xZR4lHudKzrsQ0gRRkbkb/view?usp=sharing
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1c27D3fFXtJfsvNfwr5SrzBJtwBF5zplWsIZUKu5p57k/edit?usp=sharing
