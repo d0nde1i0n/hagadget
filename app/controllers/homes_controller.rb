@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
   def top
-    flash.now[:failure] = 'Hellow,World!!'
+    flash.now[:success] = 'Hellow,World!!'
   end
 end
