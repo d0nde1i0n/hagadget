@@ -1,0 +1,10 @@
+<!--「model.errors.any?」でそのモデルのバリデーションエラーが存在するかを確認する。-->
+<% if model.errors.any? %>
+  <div class="error_message_area">
+    <ul>
+      <% model.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
