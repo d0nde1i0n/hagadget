@@ -5,5 +5,5 @@ $(function(){
 
 // 処理失敗時に表示させるフラッシュメッセージの処理
 $(function(){
-  setTimeout("$('.error').fadeOut('nomal')", 2000);
+  setTimeout("$('.failure').fadeOut('nomal')", 2000);
 });
