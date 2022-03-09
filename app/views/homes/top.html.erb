@@ -1,2 +1,36 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="conteainer">
+  <div class="row">
+    <div class="mx-auto mt-3">
+      <%= link_to "ガジェットを探しに行く！！",root_path,class:"btn btn-info" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="w-75 mx-auto mt-3 p-3 border border-info border-3">
+      <h2>「Hagadget」ってどんなサイト？</h2>
+      <div class="site_descriptions mt-3 ml-5">
+        <p>「Hagadget」は、ガジェットの使用感等をユーザ同士で意見交換できるSNSサイトです。</p>
+        <p>ガジェット好きな方はもちろん、仕事や学習が楽しくなるようなガジェットをお探しの方も当サイトはおすすめです！</p>
+        <p>あなたに合ったガジェットを探しに行きましょう！！</p>
+      </div>
+      <div class="usage-examples mt-5 ml-5 d-flex justify-content-center">
+        <div class="usage-examples text-center">
+          <%= image_tag 'israel-andrade-YI_9SivVt_s-unsplash.jpg',class: "w-50" %>
+          <p>オフィス</p>
+        </div>
+       <div class="usage-examples text-center">
+         <%= image_tag 'girl-g8d5353c17_640.jpg',class: "w-50" %>
+         <p>テレワーク・学習</p>
+       </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="w-75 mx-auto mt-3 p-3 border border-info border-3">
+      <h2>「ガジェット(gadget)って何？」</h2>
+      <div class="word_descriptions mt-3 ml-5">
+        <p>「ガジェット(Gadget)」とは、「目新しい道具、面白い小物」といった意味を持つ英単語です。</p>
+        <p>近年では、スマートフォンなどの電子機器を指すことが多くなっています。</p>
+      </div>
+    </div>
+  </div>
+</div>

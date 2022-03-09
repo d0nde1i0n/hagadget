@@ -1,7 +1,17 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+//　ヘッダーの背景画像
+nav{
+  height: 100px;
+  background-image: url("../images/israel-andrade-YI_9SivVt_s-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 0.7;
+}
 
+// フラッシュメッセージ
 .flash_message{
   // 基本的なCSSはHTMLで設定済みのため、省略
 
@@ -12,5 +22,15 @@
   .failure{
     background-color: #FF6565; //処理失敗時
   }
+}
 
+
+// フッターの背景画像
+footer{
+  height: 100px;
+  background-image: url("../images/israel-andrade-YI_9SivVt_s-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  opacity: 0.7;
 }
