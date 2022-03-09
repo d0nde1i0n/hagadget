@@ -18,11 +18,11 @@ nav{
 .flash_message{
   // 基本的なCSSはHTMLで設定済みのため、省略
 
-  .success{
+  .notice{
     background-color: #65FF65; //処理成功時
   }
 
-  .failure{
+  .alert{
     background-color: #FF6565; //処理失敗時
   }
 }
