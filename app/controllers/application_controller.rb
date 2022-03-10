@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   # デバイスコントローラが使用される前の処理を追記
   before_action :configure_permitted_parameters,if: :devise_controller?
 
+  # サインアウト（ログアウト）後の遷移先を指定
+  def after_sign_out_path_for(resourse)
+    root_path #トップページ
+  end
 
   protected
 
