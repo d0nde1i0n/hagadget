@@ -12,49 +12,77 @@
     <%= form_with model: @user,url: user_registration_path,local: true do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="field ml-2 mt-3">
-        <%= f.label :last_name,"名前（性）:"%>
-        <%= f.text_field :last_name%>
-      </div>
-
-      <div class="field ml-2 mt-3">
-        <%= f.label :first_name,"名前（名）:"%>
-        <%= f.text_field :first_name%>
-      </div>
-
-      <div class="field ml-2 mt-3">
-        <%= f.label :nickname,"ニックネーム:"%>
-        <%= f.text_field :nickname%>
-      </div>
-
-      <div class="field ml-2 mt-3">
-        <%= f.label :occupation_id,"職業:"%>
-        <%= f.select :occupation_id,options_from_collection_for_select(Occupation.all,:id,:name) %>
-      </div>
-
-      <div class="field ml-2 mt-3">
-        <%= f.label :email,"メールアドレス:" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-
-      <div class="field ml-2 mt-3">
-        <%= f.label :password,"パスワード"%>
-        <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> 文字以上):</em>
-        <% end %>
-        <%= f.password_field :password, autocomplete: "new-password" %>
-      </div>
-
-      <div class="field ml-2 mt-3">
-        <%= f.label :password_confirmation,"パスワード（確認用）:" %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-      </div>
-
-        <div class="actions mt-3 text-center">
-          <%= f.submit "登録する",class: "btn btn-success" %>
+      <!--名前-->
+      <div class="form-group row ml-2 mt-3">
+        <div class="form-title col-3 ml-2 mt-3">
+          <h4>名前</h4>
         </div>
-    <% end %>
+         <div class="form-field col-8 ml-2 mt-3">
+          <%= f.label :last_name,"性:　",class: "h5"%>
+          <%= f.text_field :last_name%>
+          <%= f.label :first_name,"　名:　",class: "h5"%>
+          <%= f.text_field :first_name%>
+        </div>
+      </div>
 
+      <!--ニックネーム-->
+      <div class ="form-group row ml-2 mt-3">
+        <div class="form-title col-3 ml-2 mt-3">
+          <%= f.label :nickname,"ニックネーム",class: "h4"%>
+        </div>
+        <div class="form-field col-8 ml-2 mt-3">
+        <%= f.text_field :nickname%>
+        </div>
+      </div>
+
+      <!--職業-->
+      <div class ="form-group row ml-2 mt-3">
+        <div class="form-title col-3 ml-2 mt-3">
+          <%= f.label :occupation_id,"職業",class: "h4"%>
+        </div>
+        <div class="form-field col-8 ml-2 mt-3">
+          <%= f.select :occupation_id,options_from_collection_for_select(Occupation.all,:id,:name) %>
+        </div>
+      </div>
+
+      <!--メールアドレス-->
+      <div class ="form-group row ml-2 mt-3">
+        <div class="form-title col-3 ml-2 mt-3">
+          <%= f.label :email,"メールアドレス",class: "h4"%>
+        </div>
+        <div class="form-field col-8 ml-2 mt-3">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+      </div>
+
+      <!--パスワード-->
+      <div class ="form-group row ml-2 mt-3">
+        <div class="form-title col-3 ml-2 mt-3">
+          <%= f.label :password,"パスワード",class: "h4"%>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> 文字以上):</em>
+          <% end %>
+        </div>
+        <div class="form-field col-8 ml-2 mt-3">
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+      </div>
+
+      <!--パスワード確認用-->
+      <div class ="form-group row ml-2 mt-3">
+        <div class="form-title col-3 ml-2 mt-3">
+          <%= f.label :password_confirmation,"パスワード（確認用）",class: "h4"%>
+        </div>
+        <div class="form-field col-8 ml-2 mt-3">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+      </div>
+
+      <!--登録ボタン-->
+      <div class="actions mt-3 text-center">
+        <%= f.submit "登録する",class: "btn btn-success" %>
+      </div>
+    <% end %>
 </div>
 
 
