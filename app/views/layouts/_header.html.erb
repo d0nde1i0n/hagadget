@@ -20,6 +20,13 @@
       <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
+            <!--ユーザがログインしている場合-->
+            <li>
+              <%= link_to user_path(current_user), class:"btn" do %>
+                  <i class="far fa-user-circle"></i>
+                <span>マイページ</span>
+              <% end %>
+            </li>
             <li>
               <%= link_to destroy_user_session_path, class:"btn",method: :delete do %>
                 <i class="fas fa-sign-out-alt"></i>
@@ -27,6 +34,7 @@
               <% end %>
             </li>
           <% else %>
+            <!--ユーザがログインしていない場合-->
             <li>
               <%= link_to new_user_registration_path, class:"btn" do %>
                 <i class="fas fa-user-plus"></i>
@@ -41,7 +49,7 @@
             </li>
           <% end %>
         </ul>
-        <!--検索（オブジェクト）のみ-->
+        <!--検索（現段階ではオブジェクトのみ）-->
         <ul class="navbar-nav ml-auto">
           <form id="form1" action="自分のサイトURL" method="get">
           <input id="sbox1" id="s" name="s" type="text" placeholder="キーワードを入力" />

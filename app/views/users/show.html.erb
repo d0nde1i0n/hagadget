@@ -1,0 +1,63 @@
+<div class="container">
+
+  <div class="site-title mt-3">
+    <h2>ユーザ詳細画面</h2>
+  </div>
+
+  <div class="row mt-3">
+
+    <div class="col-2">
+      <div class="profile-image rounded-circle border border-3 border-info">
+        <%= image_tag @user.get_profile_image, size:"150x150" %>
+      </div>
+    </div>
+
+    <div class="col-10">
+
+      <div class="d-flex justify-content-between mt-1 ml-3">
+        <div>
+          <h3><%= @user.nickname%></h3>
+        </div>
+        <div>
+          <h3><%= @user.occupation.name %></h3>
+        </div>
+        <div>
+          <%= link_to "ボタン",user_path(@user),class: "btn btn-info" %>
+          <!--編集ボタン-->
+          <!--or-->
+          <!--フォロー/フォロー解除ボタン-->
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-3 ml-3">
+        <div class="text-center">
+          <!--ガジェット投稿機能実装後に修正する必要あり-->
+          <h4>投稿ガジェット数</h4>
+          <h3>10</h3>
+        </div>
+        <div class="text-center">
+          <!--フォロー機能実装後に修正する必要あり-->
+          <h4>フォロー数</h4>
+          <h3>5</h3>
+        </div>
+        <div class="text-center">
+          <!--フォロー機能実装後に修正する必要あり-->
+          <h4>フォロワー数</h4>
+          <h3>7</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-auto mt-3 w-100">
+      <h3>ユーザ紹介文</h3>
+      <div class="border border-3 border-info">
+        <%= @user.introduction %>
+      </div>
+    </div>
+  </div>
+
+  <!--ユーザの投稿一覧-->
+  <h2><%= @user.nickname%>さんの投稿ガジェット一覧</h2>
+  <!--ガジェット一覧表示の部分テンプレートを流用予定-->
+
+</div>
