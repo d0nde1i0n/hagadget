@@ -1,16 +1,27 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+// CSSの初期化
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 //ヘッダーの背景画像
-nav{
-  height: 100px;
+header{
+  height: 10%;
+  width: 100%;
   background-image: url("../images/israel-andrade-YI_9SivVt_s-unsplash.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
 }
 
-.container{
+// ヘッダー背景の透明化
+.toumei{
+  height: 100%;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -30,7 +41,10 @@ nav{
 
 // フッターの背景画像
 footer{
-  height: 100px;
+  height: 10%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
   background-image: url("../images/israel-andrade-YI_9SivVt_s-unsplash.jpg");
   background-repeat: no-repeat;
   background-position: bottom;
