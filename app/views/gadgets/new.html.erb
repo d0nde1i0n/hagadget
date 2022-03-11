@@ -12,7 +12,7 @@
         <%= f.label :name,"ガジェット名",class: "h4"%>
       </div>
       <div class="form-field col-8 ml-2 mt-3">
-        <%= f.text_field :gadget %>
+        <%= f.text_field :name %>
       </div>
     </div>
 
@@ -43,19 +43,37 @@
         <%= f.label :price,"参考価格",class: "h4"%>
       </div>
       <div class="form-field col-8 ml-2 mt-3">
-        <%= f.number_field :price %>
+        <%= f.text_field :price %>
       </div>
     </div>
 
     <!--評価-->
     <div class ="form-group row ml-2 mt-3">
       <div class="form-title col-3 ml-2 mt-3">
-        <!--星レビュー機能実装後に更新予定-->
-        <h4>評価</h4>
+        <%= f.label :score,"評価",class: "h4" %>
       </div>
-      <div class="form-field col-8 ml-2 mt-3">
-        <!--星レビュー機能実装後に更新予定-->
+      <div class="form-field col-8 ml-2 mt-3" id="star">
+        <%= f.hidden_field :score, id: :review_star %>
+        点数：<span id="score_num"></span>
       </div>
+      <!--評価用スクリプト-->
+      <script>
+        // 「.on(turbolinks:load)」：イベント「turbolinks:load」実行後の処理
+        $(document).on('turbolinks:load',function(){
+          // id=starの子要素を全て削除し、空にする。
+          $('#star').empty();
+          // ratyの表示仕様
+          $('#star').raty({
+            size     : 36,
+            starOff  : '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            scoreName: 'gadget[score]',
+            half: true,
+            hints: ["とても不満",,"不満","普通","満足","とても満足"],
+          });
+        })
+      </script>
     </div>
 
     <!--ガジェット画像-->
@@ -77,5 +95,10 @@
         <%= f.text_area :description,class: "w-100 h-100"%>
       </div>
     </div>
+
+    <div class="form-group text-center">
+        <%= f.submit "投稿する",class: "btn btn-success" %>
+    </div>
+
   <% end %>
 </div>

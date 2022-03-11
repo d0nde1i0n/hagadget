@@ -11,7 +11,7 @@ class Gadget < ApplicationRecord
   # メソッド
   # ファイルが添付されているかを確認し、添付されていない場合には指定のファイルを添付するメソッド
   def get_gadget_image
-    (gadgets_image.attached?) ? gadgets_image : 'no_image'
+    (gadget_image.attached?) ? gadget_image : 'no_image'
   end
 
 end
