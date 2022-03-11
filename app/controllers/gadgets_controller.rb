@@ -18,6 +18,7 @@ class GadgetsController < ApplicationController
   end
 
   def index
+    @gadgets = Gadget.order(created_at: :DESC)
   end
 
   def show

@@ -1,2 +1,69 @@
-<h1>Gadgets#index</h1>
-<p>Find me in app/views/gadgets/index.html.erb</p>
+<div class="container-fulid mx-5">
+
+   <div class="site-title mt-3">
+    <h2>ガジェット記事一覧</h2>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr class="font-weight-bold text-center">
+        <th>投稿日</th>
+        <th>投稿ユーザ名</th>
+        <th>投稿ガジェット名</th>
+        <th>タグ</th>
+        <th>投稿ユーザの評価</th>
+        <th>お気に入り数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @gadgets.each do |gadget| %>
+      <tr class="text-center">
+        <td>
+          <!--投稿日-->
+          <%= gadget.date_conversion(gadget.created_at) %>
+        </td>
+        <td>
+          <!--投稿ユーザ名-->
+          <%= gadget.user.nickname %>
+        </td>
+        <td>
+          <!--投稿ガジェット名-->
+          <%= gadget.name %>
+        </td>
+        <td>
+          <!--タグ-->
+          <!--タグ機能実装後に更新予定-->
+        </td>
+        <td>
+          <!--投稿ユーザの評価(表示のみ)-->
+          <div id="score-output<%= gadget.id%>"></div>
+          <!--評価表示用スクリプト-->
+           <script>
+            // 「.on(turbolinks:load)」：イベント「turbolinks:load」実行後の処理
+            $(document).on('turbolinks:load',function(){
+              // id=starの子要素を全て削除し、空にする。
+              $('#score-output<%= gadget.id%>').empty();
+              // ratyの表示仕様
+              $('#score-output<%= gadget.id%>').raty({
+                size     : 36,
+                starOff  : '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'gadget[score]',
+                half: true,
+                readOnly: true,
+                score: <%= gadget.score %>,
+              });
+            })
+          </script>
+        </td>
+        <td>
+          <!--お気に入り数-->
+          <!--お気に入り機能実装後に更新予定-->
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
