@@ -1,2 +1,81 @@
-<h1>Gadgets#new</h1>
-<p>Find me in app/views/gadgets/new.html.erb</p>
+<div class="container">
+
+  <div class="site-title mt-3">
+    <h2>新規投稿</h2>
+  </div>
+
+  <%= form_with model: @gadget,url: gadgets_path,method: :post,local: true do |f| %>
+
+    <!--ガジェット名-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :name,"ガジェット名",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <%= f.text_field :gadget %>
+      </div>
+    </div>
+
+    <!--メーカ名-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :manufacture_name,"メーカ名",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <%= f.text_field :manufacture_name %>
+      </div>
+    </div>
+
+    <!--タグ-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <!--タグ機能実装後に更新予定-->
+        <h4>タグ</h4>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <!--タグ機能実装後に更新予定-->
+      </div>
+    </div>
+
+    <!--参考価格-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :price,"参考価格",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <%= f.number_field :price %>
+      </div>
+    </div>
+
+    <!--評価-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <!--星レビュー機能実装後に更新予定-->
+        <h4>評価</h4>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <!--星レビュー機能実装後に更新予定-->
+      </div>
+    </div>
+
+    <!--ガジェット画像-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :gadget_image,"ガジェット画像",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <%= f.file_field :gadget_image %>
+      </div>
+    </div>
+
+    <!--ガジェットの使用感-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :description,"ガジェットの使用感等",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3 ">
+        <%= f.text_area :description,class: "w-100 h-100"%>
+      </div>
+    </div>
+  <% end %>
+</div>

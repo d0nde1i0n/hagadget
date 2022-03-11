@@ -2,7 +2,7 @@ class Gadget < ApplicationRecord
 
   # アソシエーション（関連付け）
   belongs_to :user
-  has_one_attached :gadgets_image
+  has_one_attached :gadget_image
 
   # バリデーション（検証）
   validates :name,:manufacture_name,:price,:score, presence: true
