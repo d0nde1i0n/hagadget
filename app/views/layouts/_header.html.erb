@@ -28,6 +28,18 @@
               <% end %>
             </li>
             <li>
+              <%= link_to new_gadget_path, class:"btn" do %>
+                  <i class="fas fa-upload"></i>
+                <span>投稿する</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to gadgets_path, class:"btn" do %>
+                  <i class="fas fa-list-alt"></i>
+                <span>投稿一覧</span>
+              <% end %>
+            </li>
+            <li>
               <%= link_to destroy_user_session_path, class:"btn",method: :delete do %>
                 <i class="fas fa-sign-out-alt"></i>
                 <span>ログアウト</span>
