@@ -24,11 +24,18 @@
         </td>
         <td>
           <!--投稿ユーザ名-->
-          <%= gadget.user.nickname %>
+          <%= link_to user_path(gadget.user) do %>
+            <%= image_tag gadget.user.get_profile_image, size: "50x50",class: "rounded-circle border border-info"%>
+            <%= gadget.user.nickname %>
+          <% end %>
+
         </td>
         <td>
           <!--投稿ガジェット名-->
-          <%= gadget.name %>
+          <%= link_to gadget_path(gadget) do %>
+            <%= image_tag gadget.get_gadget_image, size: "50x50",class: "border border-info"%>
+            <%= gadget.name %>
+          <% end %>
         </td>
         <td>
           <!--タグ-->
