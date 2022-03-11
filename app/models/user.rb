@@ -7,6 +7,7 @@ class User < ApplicationRecord
   # アソシエーション(関連付け)
   belongs_to :occupation
   has_one_attached :profile_image
+  has_many :gadgets
 
   # バリデーション（検証）
   validates :last_name,:first_name,:nickname,length: {minimum: 1, maximum: 10}
