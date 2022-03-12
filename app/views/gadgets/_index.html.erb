@@ -37,11 +37,12 @@
           <!--タグ機能実装後に更新予定-->
         </td>
         <td>
+          <!--評価機能（表示のみ）の部分テンプレート-->
           <%= render 'gadgets/read_only_score',gadget: gadget %>
         </td>
         <td>
-          <!--お気に入り数-->
-          <!--お気に入り機能実装後に更新予定-->
+          <!--お気に入り機能の部分テンプレート-->
+          <%= render 'favorites/favorite_btn',gadget: gadget %>
         </td>
       </tr>
       <% end %>
