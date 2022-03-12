@@ -3,6 +3,7 @@ class Gadget < ApplicationRecord
   # アソシエーション（関連付け）
   belongs_to :user
   has_one_attached :gadget_image
+  has_many :favorites,dependent: :destroy
 
   # バリデーション（検証）
   validates :name,:manufacture_name,:price,:score, presence: true
@@ -23,4 +24,10 @@ class Gadget < ApplicationRecord
     return date_after_conversion
   end
 
+  # favoritesテーブルのカラムuser_idにuser.idが存在するかを確認するメソッド
+  def favorited_by?(user)
+    # where:指定した条件に一致するレコードを全て取得する
+    # exit?:指定した条件が存在するか"true"or"false"で返す
+    favorites.where(user_id: user.id).exists?
+  end
 end
