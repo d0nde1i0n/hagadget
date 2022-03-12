@@ -17,7 +17,9 @@ class Gadget < ApplicationRecord
   # DBから取得した投稿日を整形するためのメソッド
   def date_conversion(post_date)
     dw = ["日", "月", "火", "水", "木", "金", "土"]
-    date_after_conversion = post_date.strftime("%Y/%m/%d (%a)")
+    # strftime:引数で指定された書式文字列に従い、日付を表現する文字列を返す。
+    # wday:曜日に対応する数値（0~6)を返す（例）日：0、土：6
+    date_after_conversion = post_date.strftime("%Y/%m/%d (#{dw[post_date.wday]})")
     return date_after_conversion
   end
 
