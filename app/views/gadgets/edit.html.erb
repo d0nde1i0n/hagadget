@@ -1,2 +1,104 @@
-<h1>Gadgets#edit</h1>
-<p>Find me in app/views/gadgets/edit.html.erb</p>
+<div class="container">
+
+  <div class="site-title mt-3">
+    <h2>投稿記事編集</h2>
+  </div>
+
+  <%= form_with model: @gadget,url: gadget_path(@gadget),method: :patch,local: true do |f| %>
+
+    <!--ガジェット名-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :name,"ガジェット名",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <!--メーカ名-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :manufacture_name,"メーカ名",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <%= f.text_field :manufacture_name %>
+      </div>
+    </div>
+
+    <!--タグ-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <!--タグ機能実装後に更新予定-->
+        <h4>タグ</h4>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <!--タグ機能実装後に更新予定-->
+      </div>
+    </div>
+
+    <!--参考価格-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :price,"参考価格",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <%= f.text_field :price %>
+      </div>
+    </div>
+
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :score,"評価",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <!--投稿ユーザの評価(表示のみ)-->
+        <div id="score-output<%= @gadget.id%>"></div>
+          <!--評価表示用スクリプト-->
+          <script>
+            // 「.on(turbolinks:load)」：イベント「turbolinks:load」実行後の処理
+            $(document).on('turbolinks:load',function(){
+              // id=starの子要素を全て削除し、空にする。
+              $('#score-output<%= @gadget.id%>').empty();
+              // ratyの表示仕様
+              $('#score-output<%= @gadget.id%>').raty({
+                size     : 36,
+                starOff  : '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'gadget[score]',
+                half: true,
+                readOnly: true,
+                score: <%= @gadget.score %>,
+              });
+            })
+          </script>
+        </div>
+      </div>
+
+    <!--ガジェット画像-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :gadget_image,"ガジェット画像",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3">
+        <%= f.file_field :gadget_image %>
+      </div>
+    </div>
+
+    <!--ガジェットの使用感-->
+    <div class ="form-group row ml-2 mt-3">
+      <div class="form-title col-3 ml-2 mt-3">
+        <%= f.label :description,"ガジェットの使用感等",class: "h4"%>
+      </div>
+      <div class="form-field col-8 ml-2 mt-3 ">
+        <%= f.text_area :description,class: "w-100 h-100"%>
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+        <%= f.submit "更新する",class: "btn btn-success" %>
+    </div>
+
+  <% end %>
+</div>

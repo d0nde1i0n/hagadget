@@ -1,2 +1,125 @@
-<h1>Gadgets#show</h1>
-<p>Find me in app/views/gadgets/show.html.erb</p>
+<div class="container">
+
+  <div class="site-title mt-3">
+    <h2>ガジェット記事詳細</h2>
+  </div>
+
+  <div class="row mt-3">
+    <!--投稿されたガジェット画像-->
+    <div class="col-3">
+      <%= image_tag @gadget.get_gadget_image,class: "w-100" %>
+    </div>
+
+    <!--投稿ガジェットに紐づく情報-->
+    <div class="col-6 h5">
+
+      <!--ガジェット名-->
+      <div class="row mb-2">
+        <div class="col-4">
+          <span>ガジェット名</span>
+        </div>
+        <div class="col-8">
+          <%= @gadget.name %>
+        </div>
+      </div>
+
+      <!--メーカー名-->
+      <div class="row mb-2">
+        <div class="col-4">
+          <span>メーカー名</span>
+        </div>
+        <div class="col-8">
+          <%= @gadget.manufacture_name %>
+        </div>
+      </div>
+
+      <!--タグ-->
+      <div class="row mb-2">
+        <div class="col-4">
+          <span>タグ</span>
+        </div>
+        <div class="col-8">
+          <!--タグ機能実装後、更新予定-->
+        </div>
+      </div>
+
+       <!--参考価格-->
+      <div class="row mb-2">
+        <div class="col-4">
+          <span>参考価格</span>
+        </div>
+        <div class="col-8">
+          <!--number_to_currency:数値を通過のフォーマットに変換するメソッド-->
+          <!--format => "%n%u":「数値＋単位」の順番に表示されるように指定-->
+          <!--precision：小数点以下の表示桁数-->
+          <%= number_to_currency(@gadget.price,:format => "%n%u",:unit => "円",:precision => 0) %>
+        </div>
+      </div>
+
+      <!--投稿ユーザの評価-->
+      <div class="row mb-2">
+        <div class="col-4">
+          <span>投稿ユーザの評価</span>
+        </div>
+        <div class="col-8">
+           <!--投稿ユーザの評価(表示のみ)-->
+          <div id="score-output<%= @gadget.id%>"></div>
+          <!--評価表示用スクリプト-->
+          <script>
+            // 「.on(turbolinks:load)」：イベント「turbolinks:load」実行後の処理
+            $(document).on('turbolinks:load',function(){
+              // id=starの子要素を全て削除し、空にする。
+              $('#score-output<%= @gadget.id%>').empty();
+              // ratyの表示仕様
+              $('#score-output<%= @gadget.id%>').raty({
+                size     : 36,
+                starOff  : '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'gadget[score]',
+                half: true,
+                readOnly: true,
+                score: <%= @gadget.score %>,
+              });
+            })
+          </script>
+        </div>
+      </div>
+
+       <!--投稿ユーザ名-->
+      <div class="row mb-2">
+        <div class="col-4">
+          <span>投稿ユーザ名</span>
+        </div>
+        <div class="col-8">
+          <%= link_to user_path(@gadget.user)  do %>
+            <%= @gadget.user.nickname %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!--お気に入り数、各種ボタンの表示-->
+    <div class="col-3">
+      <div class="text-center h4">お気に入りされた数</div>
+      <!--お気に入り機能実装後、更新予定-->
+      <div class="text-center h3">5</div>
+      <!--投稿ユーザ＝ログインユーザの場合-->
+      <% if @gadget.user == current_user %>
+      <div class="d-flex justify-content-around mt-5">
+        <!--編集ボタン-->
+        <%= link_to "編集",edit_gadget_path(@gadget),class: "btn btn-success w-50 mr-2"%>
+        <!---削除ボタン-->
+        <%= link_to "削除",@gadjet,class: "btn btn-danger w-50",method: :delete,local: true,
+            data: { confirm: '本当に投稿記事を削除しますか？'} %>
+        <% else %>
+      </div>
+        <!--お気に入り機能実装後、更新予定-->
+        許可されていません
+      <% end %>
+     </div>
+
+      <!--コメント機能実装後、更新予定-->
+</div>
+
+
