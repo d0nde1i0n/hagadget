@@ -22,10 +22,12 @@
           <h3><%= @user.occupation.name %></h3>
         </div>
         <div>
-          <%= link_to "ボタン",user_path(@user),class: "btn btn-info" %>
-          <!--編集ボタン-->
-          <!--or-->
-          <!--フォロー/フォロー解除ボタン-->
+          <% if @user == current_user %><!--投稿ユーザ＝ログインユーザの場合-->
+            <!--ユーザ情報編集ボタン-->
+            <%= link_to "ユーザ情報編集",edit_user_path(@user),class: "btn btn-success" %>
+          <% else %>
+            <!--フォロー/フォロー解除ボタン-->
+          <% end %>
         </div>
       </div>
 
