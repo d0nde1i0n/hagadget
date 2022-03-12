@@ -102,8 +102,9 @@
     <!--お気に入り数、各種ボタンの表示-->
     <div class="col-3">
       <div class="text-center h4">お気に入りされた数</div>
-      <!--お気に入り機能実装後、更新予定-->
-      <div class="text-center h3">5</div>
+      <div class="mt-4 text-center h2">
+        <%= render 'favorites/favorite_btn',gadget: @gadget%>
+      </div>
       <!--投稿ユーザ＝ログインユーザの場合-->
       <% if @gadget.user == current_user %>
       <div class="d-flex justify-content-around mt-5">
@@ -112,11 +113,8 @@
         <!---削除ボタン-->
         <%= link_to "削除",@gadjet,class: "btn btn-danger w-50",method: :delete,local: true,
             data: { confirm: '本当に投稿記事を削除しますか？'} %>
-        <% else %>
+        <% end %>
       </div>
-        <!--お気に入り機能実装後、更新予定-->
-        許可されていません
-      <% end %>
      </div>
 
       <!--コメント機能実装後、更新予定-->
