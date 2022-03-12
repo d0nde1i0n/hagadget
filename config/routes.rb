@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   # ガジェット記事関連のルーティング
   resources :gadgets, only: [:new,:create,:index,:show,:edit,:update,:destroy] do
     resource :favorites,only: [:create,:destroy]
+    resources :gadget_comments,only: [:create,:destroy]
   end
 end
