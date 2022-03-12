@@ -57,7 +57,10 @@
   </div>
 
   <!--ユーザの投稿一覧-->
-  <h2><%= @user.nickname%>さんの投稿ガジェット一覧</h2>
-  <!--ガジェット一覧表示の部分テンプレートを流用予定-->
+  <div class="row mt-5"></div>
+  <h3><%= @user.nickname%>さんの投稿ガジェット一覧</h3>
+
+  <!--ガジェット一覧テーブルの部分テンプレート-->
+  <%= render 'gadgets/index',gadgets: @gadgets %>
 
 </div>

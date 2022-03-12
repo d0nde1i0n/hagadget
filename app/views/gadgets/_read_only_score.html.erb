@@ -1,0 +1,22 @@
+<!--投稿ユーザの評価(表示のみ)：【部分テンプレート】-->
+  <div id="score-output<%= gadget.id%>"></div>
+  <!--評価表示用スクリプト-->
+    <script>
+      // 「.on(turbolinks:load)」：イベント「turbolinks:load」実行後の処理
+      $(document).on('turbolinks:load',function(){
+        // id=starの子要素を全て削除し、空にする。
+        $('#score-output<%= gadget.id%>').empty();
+        // ratyの表示仕様
+        $('#score-output<%= gadget.id%>').raty({
+          size     : 36,
+          starOff  : '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          scoreName: 'gadget[score]',
+          half: true,
+          readOnly: true,
+          score: <%= gadget.score %>,
+        });
+      })
+    </script>
+  </div>
