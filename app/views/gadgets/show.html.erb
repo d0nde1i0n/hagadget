@@ -15,39 +15,25 @@
 
       <!--ガジェット名-->
       <div class="row mb-2">
-        <div class="col-4">
-          <span>ガジェット名</span>
-        </div>
-        <div class="col-8">
-          <%= @gadget.name %>
-        </div>
+        <div class="col-4">ガジェット名</div>
+        <div class="col-8"><%= @gadget.name %></div>
       </div>
 
       <!--メーカー名-->
       <div class="row mb-2">
-        <div class="col-4">
-          <span>メーカー名</span>
-        </div>
-        <div class="col-8">
-          <%= @gadget.manufacture_name %>
-        </div>
+        <div class="col-4">メーカー名</div>
+        <div class="col-8"><%= @gadget.manufacture_name %></div>
       </div>
 
-      <!--タグ-->
+       <!--タグ-->
       <div class="row mb-2">
-        <div class="col-4">
-          <span>タグ</span>
-        </div>
-        <div class="col-8">
-          <!--タグ機能実装後、更新予定-->
-        </div>
+        <div class="col-4">タグ</div>
+        <div class="col-8"><!--タグ機能実装後、更新予定--></div>
       </div>
 
        <!--参考価格-->
       <div class="row mb-2">
-        <div class="col-4">
-          <span>参考価格</span>
-        </div>
+        <div class="col-4">参考価格</div>
         <div class="col-8">
           <!--number_to_currency:数値を通過のフォーマットに変換するメソッド-->
           <!--format => "%n%u":「数値＋単位」の順番に表示されるように指定-->
@@ -58,9 +44,7 @@
 
       <!--投稿ユーザの評価-->
       <div class="row mb-2">
-        <div class="col-4">
-          <span>投稿ユーザの評価</span>
-        </div>
+        <div class="col-4">投稿ユーザの評価</div>
         <div class="col-8">
            <!--投稿ユーザの評価(表示のみ)-->
           <div id="score-output<%= @gadget.id%>"></div>
@@ -86,11 +70,9 @@
         </div>
       </div>
 
-       <!--投稿ユーザ名-->
+      <!--投稿ユーザ名-->
       <div class="row mb-2">
-        <div class="col-4">
-          <span>投稿ユーザ名</span>
-        </div>
+        <div class="col-4">投稿ユーザ名</div>
         <div class="col-8">
           <%= link_to user_path(@gadget.user)  do %>
             <%= @gadget.user.nickname %>
@@ -107,27 +89,43 @@
       </div>
       <!--投稿ユーザ＝ログインユーザの場合-->
       <% if @gadget.user == current_user %>
-      <div class="d-flex justify-content-around mt-5">
-        <!--編集ボタン-->
-        <%= link_to "編集",edit_gadget_path(@gadget),class: "btn btn-success w-50 mr-2"%>
-        <!---削除ボタン-->
-        <%= link_to "削除",@gadjet,class: "btn btn-danger w-50",method: :delete,local: true,
+        <div class="d-flex justify-content-around mt-5">
+          <!--編集ボタン-->
+          <%= link_to "編集",edit_gadget_path(@gadget),class: "btn btn-success w-50 mr-2"%>
+          <!---削除ボタン-->
+          <%= link_to "削除",@gadjet,class: "btn btn-danger w-50",method: :delete,local: true,
             data: { confirm: '本当に投稿記事を削除しますか？'} %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 
-  <%= form_with model: [@gadget,@gadget_comment],local: true do |f| %>
-    <div class="text-center">
-      <%= f.text_area :comment,class: "w-50"%>
+    <!--コメント一覧-->
+    <div class="row">
+      <%= render 'gadget_comments/index',gadget_comments: @gadget_comments %>
     </div>
-    <div class="text-center">
-      <%= f.submit "コメント投稿",class: "btn btn-success" %>
-    </div>
-  <% end %>
+
+    <!--コメント投稿-->
+      <%= form_with model: [@gadget,@gadget_comment],local: true do |f| %>
+        <div class="text-center">
+          <%= f.text_area :comment,class: "w-50"%>
+        </div>
+        <div class="text-center">
+          <%= f.submit "コメント投稿",class: "btn btn-success" %>
+        </div>
+      <% end %>
 
 </div>
+
+
+
+
+
+
+
+
+
+
 
 
 
