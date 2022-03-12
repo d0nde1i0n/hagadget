@@ -1,6 +1,6 @@
 class GadgetCommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_gadget_inffo
+  before_action :set_gadget_info
 
   def create
     # before_action :set_gadget_infoで「@gadget」を取得
@@ -26,7 +26,7 @@ class GadgetCommentsController < ApplicationController
     params.require(:gadget_comment).permit(:comment)
   end
 
-  def set_gadget_comment_info
+  def set_gadget_info
     @gadget = Gadget.find(params[:gadget_id])
   end
 end
