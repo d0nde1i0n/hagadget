@@ -14,9 +14,9 @@ class User < ApplicationRecord
   # 被フォロー側のアソシエーション
   # UserテーブルとRelationshipテーブルのアソシエーションだが、与フォロー側のアソシエーションと
   # 区別するために名称「reverse_of_relationship」を新たに付与している。
-  has_many :reverse_of_relationship,class_name: 'Relationship',foregin_key: :followed_id,dependent: :destroy
+  has_many :reverse_of_relationship,class_name: 'Relationship',foreign_key: :followed_id,dependent: :destroy
   # 与フォロー側のアソシエーション
-  has_many :relationships,foregin_key: :follower_id,dependent: :destroy
+  has_many :relationships,foreign_key: :follower_id,dependent: :destroy
   # 被フォロー関係を通じて、自分をフォローする人を参照するためのアソシエーション
   has_many :follwers,through: :reverse_of_relationship, source: :follower
   # 与フォロー関係を通じて、自分がフォローする人を参照するためのアソシエーション
