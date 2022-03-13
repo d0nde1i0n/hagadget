@@ -102,11 +102,16 @@
 
     <!--コメント一覧-->
     <div class="row">
+      <div class="h4">
+        <span>コメント一覧:</span>
+        <span id="gadget-comment-count"><%= @gadget_comments.count %></span>
+        <span>件</span>
+      </div>
       <%= render 'gadget_comments/index',gadget_comments: @gadget_comments %>
     </div>
 
     <!--コメント投稿-->
-      <%= form_with model: [@gadget,@gadget_comment],local: true do |f| %>
+      <%= form_with model: [@gadget,@gadget_comment],remote: true do |f| %>
         <div class="text-center">
           <%= f.text_area :comment,class: "w-50"%>
         </div>
