@@ -1,7 +1,6 @@
-<div class="h4">コメント一覧(<%= gadget_comments.count %>件）</div>
-
-<% gadget_comments.each do |gadget_comment| %>
-  <table class="table">
+<!--コメント一覧の表示：【部分テンプレート】-->
+  <table id="comment-display-area" class="table">
+    <% gadget_comments.each do |gadget_comment| %>
     <tbody>
       <tr>
         <td style="width: 15%">
@@ -21,12 +20,14 @@
         <td style="width: 15%">
           <%= link_to "コメント削除",gadget_gadget_comment_path(gadget_comment.gadget,gadget_comment),
               data: {confirm: "本当に対象コメントを削除しますか？"},class: "btn btn-danger",
-              method: :delete,local: true %>
+              method: :delete,remote: true%>
         </td>
       </tr>
     </tbody>
+     <% end %>
   </table>
-<% end %>
+
+
 
 
 
