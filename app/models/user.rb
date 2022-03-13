@@ -33,4 +33,8 @@ class User < ApplicationRecord
     (profile_image.attached?) ? profile_image : 'no_profile_image'
   end
 
+  def followerd_by(user)?
+    relationships.where(follower_id: user.id).exists?
+  end
+
 end
