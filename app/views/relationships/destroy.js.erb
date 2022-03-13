@@ -1,3 +1,6 @@
-<!--フォロー解除ボタン押下後の非同期処理-->
+<!--フォローボタン押下後の非同期処理-->
+
+<!--フォロワー数の再描画処理-->
 $("#number-of-followers-<%= @user.id %>").html("<%= j(render 'users/number_of_followers',user: @user) %>");
+<!--フォローボタンの再描画処理-->
 $("#follow-btn-<%= @user.id %>").html("<%= j(render 'relationships/follow_btn',user: @user) %>");
