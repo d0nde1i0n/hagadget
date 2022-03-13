@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user_info,only:[:show,:edit,:update,:followers,:ensure_correct_user]
+  before_action :set_user_info,only:[:show,:edit,:update,:followers,:followings,:ensure_correct_user]
   before_action :ensure_correct_user,only: [:edit,:update]
 
 
@@ -26,12 +26,15 @@ class UsersController < ApplicationController
 
   def followers
     # before_action :set_user_infoで「@user」を取得
-    @users= @user.followers
+    # 「@userに紐づくユーザをフォローしているユーザ達(fllowers)」＝「@userに紐づくユーザのフォロワー」
+    @users = @user.followers.page(params[:page])
   end
 
   def followings
     # before_action :set_user_infoで「@user」を取得
-    @users = @user.followings
+    # 「@userに紐づくユーザにフォローされているユーザ達(fllowings)」
+    #   ＝「@userに紐づくユーザがフォロー中」
+    @users = @user.followings.page(params[:page])
   end
 
 
