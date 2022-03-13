@@ -4,10 +4,11 @@ class Gadget < ApplicationRecord
   belongs_to :user
   has_one_attached :gadget_image
   has_many :favorites,dependent: :destroy
+  has_many :gadget_comments,dependent: :destroy
 
   # バリデーション（検証）
   validates :name,:manufacture_name,:price,:score, presence: true
-  validates :description,length: {maximum: 300}
+  validates :description,length: {minimum: 1,maximum: 300}
 
   # メソッド
   # ファイルが添付されているかを確認し、添付されていない場合には指定のファイルを添付するメソッド

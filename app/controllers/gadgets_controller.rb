@@ -27,6 +27,8 @@ class GadgetsController < ApplicationController
 
   def show
     # before_action :set_gadget_infoで「@gadget」を取得
+    @gadget_comments = @gadget.gadget_comments.all
+    @gadget_comment = GadgetComment.new
   end
 
   def edit

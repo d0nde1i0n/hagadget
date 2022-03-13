@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   has_many :gadgets,dependent: :destroy
   has_many :favorites,dependent: :destroy
+  has_many :gadget_comments,dependent: :destroy
 
   # バリデーション（検証）
   validates :last_name,:first_name,:nickname,length: {minimum: 1, maximum: 10}

@@ -1,0 +1,36 @@
+<div class="h4">コメント一覧(<%= gadget_comments.count %>件）</div>
+
+<% gadget_comments.each do |gadget_comment| %>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td style="width: 15%">
+          <%= gadget_comment.gadget.date_conversion(gadget_comment.created_at) %>
+        </td>
+        <td style="width: 25%">
+          <%= link_to user_path(gadget_comment.user) do %>
+            <%= image_tag gadget_comment.user.get_profile_image,size: "50x50",
+              class: "rounded-circle border border-3 border-info" %>
+            <%= gadget_comment.user.nickname %>
+          <% end %>
+        </td>
+        <td style="width: 45%">
+          <%= gadget_comment.comment %>
+        </td>
+
+        <td style="width: 15%">
+          <%= link_to "コメント削除",gadget_gadget_comment_path(gadget_comment.gadget,gadget_comment),
+              data: {confirm: "本当に対象コメントを削除しますか？"},class: "btn btn-danger",
+              method: :delete,local: true %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+
+
+
+
+
+
