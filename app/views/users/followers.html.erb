@@ -1,0 +1,14 @@
+ <div class="container">
+
+  <div class="d-flex justify-content-between mt-5">
+    <div class="h2">
+      <%= @user.nickname%>さんがフォロー中
+    </div>
+    <%= link_to user_path(@user),class: "h5" do %>
+      <%= @user.nickname %>さんのマイページに戻る
+    <% end %>
+  </div>
+
+  <!--ユーザ一覧の部分テンプレート-->
+  <%= render 'users/index',users: @users %>
+ </div>
