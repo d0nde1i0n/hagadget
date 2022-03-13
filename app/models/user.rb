@@ -14,13 +14,13 @@ class User < ApplicationRecord
   # 被フォロー側のアソシエーション
   # UserテーブルとRelationshipテーブルのアソシエーションだが、与フォロー側のアソシエーションと
   # 区別するために名称「reverse_of_relationship」を新たに付与している。
-  has_many :reverse_of_relationship,class_name: 'Relationship',foreign_key: :followed_id,dependent: :destroy
+  has_many :reverse_of_relationships,class_name: 'Relationship',foreign_key: :followed_id,dependent: :destroy
   # 与フォロー側のアソシエーション
   has_many :relationships,foreign_key: :follower_id,dependent: :destroy
   # 被フォロー関係を通じて、自分をフォローする人を参照するためのアソシエーション
-  has_many :follwers,through: :reverse_of_relationship, source: :follower
+  has_many :followers,through: :reverse_of_relationship, source: :follower
   # 与フォロー関係を通じて、自分がフォローする人を参照するためのアソシエーション
-  has_many :followings,through: :relationship, source: :followed
+  has_many :followings,through: :relationships, source: :followed
 
 
   # バリデーション（検証）
@@ -36,7 +36,7 @@ class User < ApplicationRecord
   # reverse_of_relationshipsテーブルのカラムfollower_idにuser.idが存在するかを確認するメソッド
   def is_follower_by?(user)
     # フォローするユーザから見た中間テーブルのため、reverse_of_relationshipを指定。
-    reverse_of_relationship.where(follower_id: user.id).exists?
+    reverse_of_relationships.where(follower_id: user.id).exists?
   end
 
 end
