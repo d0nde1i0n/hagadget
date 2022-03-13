@@ -1,12 +1,14 @@
-<!--いいねボタン-->
+<!--お気に入りボタン-->
+<div id="favorite-btn-<%= gadget.id %>">
   <% if gadget.favorited_by?(current_user) %>
-     <%= link_to gadget_favorites_path(gadget),class: "favorite-btn text-danger",method: :delete,local: true do %>
+     <%= link_to gadget_favorites_path(gadget),class: "favorite-btn text-danger",method: :delete,remote: true do %>
         <i class="fas fa-bookmark"></i>
         <%= gadget.favorites.count %>
        <% end %>
   <% else %>
-      <%= link_to gadget_favorites_path(gadget),class: "favorite-btn text-primary",method: :post,local: true do %>
+      <%= link_to gadget_favorites_path(gadget),class: "favorite-btn text-primary",method: :post,remote:true do %>
         <i class="far fa-bookmark"></i>
         <%= gadget.favorites.count %>
-       <% end %>
+      <% end %>
   <% end %>
+</div>

@@ -47,7 +47,8 @@
           <!--フォロー機能実装後に修正する必要あり-->
           <h4>フォロワー数</h4>
           <%= link_to followers_user_path(@user),class: "h3" do %>
-            <%= @user.followers.count %>
+            <!--フォロワー数の部分テンプレート-->
+            <%= render 'users/number_of_followers',user: @user %>
           <% end %>
         </div>
       </div>
