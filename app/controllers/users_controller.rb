@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user_info,only:[:show,:edit,:update,:ensure_correct_user]
+  before_action :set_user_info,only:[:show,:edit,:update,:followers,:ensure_correct_user]
   before_action :ensure_correct_user,only: [:edit,:update]
 
 
@@ -23,6 +23,17 @@ class UsersController < ApplicationController
       flash[:alert] = "ユーザ情報の更新に失敗しました。"
     end
   end
+
+  def followers
+    # before_action :set_user_infoで「@user」を取得
+    @users= @user.followers
+  end
+
+  def followings
+    # before_action :set_user_infoで「@user」を取得
+    @users = @user.followings
+  end
+
 
   private
 
