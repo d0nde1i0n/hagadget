@@ -18,7 +18,7 @@ class User < ApplicationRecord
   # 与フォロー側のアソシエーション
   has_many :relationships,foreign_key: :follower_id,dependent: :destroy
   # 被フォロー関係を通じて、自分をフォローする人を参照するためのアソシエーション
-  has_many :followers,through: :reverse_of_relationship, source: :follower
+  has_many :followers,through: :reverse_of_relationships, source: :follower
   # 与フォロー関係を通じて、自分がフォローする人を参照するためのアソシエーション
   has_many :followings,through: :relationships, source: :followed
 
