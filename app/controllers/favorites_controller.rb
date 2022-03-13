@@ -7,7 +7,7 @@ class FavoritesController < ApplicationController
     # 1行上で取得した情報に基づく。
     favorite = current_user.favorites.new(gadget_id: @gadget.id)
     favorite.save
-    redirect_to request.referer
+
   end
 
   def destroy
@@ -17,6 +17,6 @@ class FavoritesController < ApplicationController
     # レコードを検索する
     favorite = current_user.favorites.find_by(gadget_id: @gadget.id)
     favorite.destroy
-    redirect_to request.referer
+
   end
 end

@@ -84,9 +84,9 @@
     <!--お気に入り数、各種ボタンの表示-->
     <div class="col-3">
       <div class="text-center h4">お気に入りされた数</div>
-      <div class="mt-4 text-center h2">
-        <%= render 'favorites/favorite_btn',gadget: @gadget%>
-      </div>
+        <div  class="mt-4 text-center h2">
+          <%= render 'favorites/favorite_btn',gadget: @gadget%>
+        </div>
       <!--投稿ユーザ＝ログインユーザの場合-->
       <% if @gadget.user == current_user %>
         <div class="d-flex justify-content-around mt-5">
@@ -114,7 +114,6 @@
           <%= f.submit "コメント投稿",class: "btn btn-success" %>
         </div>
       <% end %>
-
 </div>
 
 
