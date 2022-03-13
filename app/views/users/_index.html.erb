@@ -30,7 +30,8 @@
         </td>
         <!--フォロワー数-->
         <td class="text-center h4">
-          <%= user.followers.count %>
+          <!--フォロワー数の部分テンプレート-->
+          <%= render 'users/number_of_followers',user: user %>
         </td>
         <!--フォロー/フォロー解除ボタン-->
         <td>

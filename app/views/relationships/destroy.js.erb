@@ -1,0 +1,3 @@
+<!--フォロー解除ボタン押下後の非同期処理-->
+$("#number-of-followers-<%= @user.id %>").html("<%= j(render 'users/number_of_followers',user: @user) %>");
+$("#follow-btn-<%= @user.id %>").html("<%= j(render 'relationships/follow_btn',user: @user) %>");
