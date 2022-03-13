@@ -1,0 +1,49 @@
+<table class="table mt-3">
+  <thead>
+    <tr class="text-center">
+      <th style="width: 40%">ユーザ名</th>
+      <th style="width: 15%">投稿ガジェット数</th>
+      <th style="width: 15%">フォロー数</th>
+      <th style="width: 15%">フォロワー数</th>
+      <th style="width: 15%"> <!--フォロー/フォロー解除ボタン--></th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+      <tr>
+        <!--ユーザ名-->
+        <td class="h5">
+          <%= link_to user_path(user) do %>
+            <%= image_tag user.get_profile_image,size: "50x50",
+                class: "rounded-circle border border-info border-3"%>
+            <%= user.nickname %>
+          <% end %>
+        </td>
+        <!--投稿ガジェット数-->
+        <td class="text-center h4">
+          <%= user.gadgets.count %>
+        </td>
+        <!--フォロー数-->
+        <td class="text-center h4">
+          <%= user.followings.count %>
+        </td>
+        <!--フォロワー数-->
+        <td class="text-center h4">
+          <%= user.followers.count %>
+        </td>
+        <!--フォロー/フォロー解除ボタン-->
+        <td>
+          <% unless user == current_user %>
+            <%= render "relationships/follow_btn",user: user %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!--ページネーションの設定-->
+<div>
+  <%= paginate users,class: "bg-reset"%>
+</div>
