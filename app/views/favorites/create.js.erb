@@ -1,0 +1,4 @@
+<!--お気に入り登録後の非同期処理-->
+
+<!--お気に入りボタンを再描画-->
+$("#favorite-btn-<%= @gadget.id%>").html("<%= j(render 'favorites/favorite_btn',gadget: @gadget) %>");

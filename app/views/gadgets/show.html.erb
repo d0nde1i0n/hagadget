@@ -84,9 +84,9 @@
     <!--お気に入り数、各種ボタンの表示-->
     <div class="col-3">
       <div class="text-center h4">お気に入りされた数</div>
-      <div class="mt-4 text-center h2">
-        <%= render 'favorites/favorite_btn',gadget: @gadget%>
-      </div>
+        <div  class="mt-4 text-center h2">
+          <%= render 'favorites/favorite_btn',gadget: @gadget%>
+        </div>
       <!--投稿ユーザ＝ログインユーザの場合-->
       <% if @gadget.user == current_user %>
         <div class="d-flex justify-content-around mt-5">
@@ -102,11 +102,16 @@
 
     <!--コメント一覧-->
     <div class="row">
+      <div class="h4">
+        <span>コメント一覧:</span>
+        <span id="gadget-comment-count"><%= @gadget_comments.count %></span>
+        <span>件</span>
+      </div>
       <%= render 'gadget_comments/index',gadget_comments: @gadget_comments %>
     </div>
 
     <!--コメント投稿-->
-      <%= form_with model: [@gadget,@gadget_comment],local: true do |f| %>
+      <%= form_with model: [@gadget,@gadget_comment],remote: true do |f| %>
         <div class="text-center">
           <%= f.text_area :comment,class: "w-50"%>
         </div>
@@ -114,7 +119,6 @@
           <%= f.submit "コメント投稿",class: "btn btn-success" %>
         </div>
       <% end %>
-
 </div>
 
 

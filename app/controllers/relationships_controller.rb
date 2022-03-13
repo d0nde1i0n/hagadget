@@ -4,15 +4,17 @@ class RelationshipsController < ApplicationController
   def create
     # フォローするユーザ側から見た場合のパラメータは、
     # (follower_id,fllowed_id) = (ログインユーザid,フォロー対象のユーザid)
-    relationship = current_user.relationships.new(followed_id: params[:user_id])
+    @user = User.find(params[:user_id])
+    relationship = current_user.relationships.new(followed_id: @user.id)
     relationship.save
-    redirect_to request.referer
+
   end
 
   def destroy
-    # relationshipsテーブルからfollower_id、followed_idが、それぞれ一致するレコードを検索する。
-    relationship = current_user.relationships.find_by(followed_id: params[:user_id])
+    # relationshipsテーブルからfollower_id、followed_idが、それぞれ一致するレコードを検索する
+    @user = User.find(params[:user_id])
+    relationship = current_user.relationships.find_by(followed_id: @user.id)
     relationship.destroy
-    redirect_to request.referer
+
   end
 end
