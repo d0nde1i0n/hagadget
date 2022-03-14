@@ -11,7 +11,9 @@
 
   <!--通知一覧表示-->
   <table class="table">
-    <%= render 'notifications/#{notification.action_type}',notification: @notification %>
+    <% @notifications.each do |notification| %>
+      <%= render 'notifications/favorited_to_own_post',notification: notification %>
+    <% end %>
   </table>
 
  </div>
