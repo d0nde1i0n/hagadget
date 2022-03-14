@@ -43,7 +43,7 @@ class Gadget < ApplicationRecord
       ])
 
     # notificationsテーブルに該当するレコードがない場合のみ、通知レコードを作成
-    if temp.blank
+    if temp.blank?
       # 「.blank?」：対象オブジェクトが空白の場合にtrueを返すメソッド
       # ここでいう「空白」とは、「空文字」、「空白」、「false」、「nil」を指す。
 
