@@ -5,6 +5,7 @@ class Gadget < ApplicationRecord
   has_one_attached :gadget_image
   has_many :favorites,dependent: :destroy
   has_many :gadget_comments,dependent: :destroy
+  has_many :notifications,dependent: :destroy
 
   # バリデーション（検証）
   validates :name,:manufacture_name,:price,:score, presence: true
