@@ -12,7 +12,10 @@
   <!--通知一覧表示-->
   <table class="table">
     <% @notifications.each do |notification| %>
-      <%= render 'notifications/favorited_to_own_post',notification: notification %>
+      <%= render "notifications/#{Notification.action_types.key(notification.action)}",notification: notification %>
+      <!--Notification.action_types.key(notification.action)部分について-->
+      <!--「部分テンプレートのファイル名」と「enumに設定したアクション名」を同じにしているため、-->
+      <!--呼び出すテンプレートファイル名をenumを使用して指定している。-->
     <% end %>
   </table>
 
