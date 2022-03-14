@@ -7,6 +7,7 @@ class FavoritesController < ApplicationController
     # 1行上で取得した情報に基づく。
     favorite = current_user.favorites.new(gadget_id: @gadget.id)
     favorite.save
+    @adget.create_notification_favorite!(current_user)
 
   end
 

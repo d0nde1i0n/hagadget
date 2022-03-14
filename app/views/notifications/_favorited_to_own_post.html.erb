@@ -1,0 +1,10 @@
+<tr>
+  <td>
+      <%= link_to user_path(notification.visitor) do %>
+        <strong>notification.visitor.nickname</strong>
+      <% end %>
+      <span>さんが</span>
+      <%= link_to 'あなたの投稿',gadget_path(notification.gadget) %>
+      <span>をお気に入り登録しました。</span>
+  </td>
+</tr>
