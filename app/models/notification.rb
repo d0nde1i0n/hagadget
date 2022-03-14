@@ -15,4 +15,12 @@ class Notification < ApplicationRecord
   validates :action,presence: true
   # 「inclusion: {in: 〇〇}」：保存できる値を〇〇に制限する。
   validates :checked, inclusion: {in: [true,false]}
+
+  # enumを使用したNotificationモデルの「action」の定義
+  enum action_type: {
+    commented_to_own_post: 0, # コメント
+    liked_to_own_post: 1, # いいね
+    followed_me: 2 # フォロー
+  }
+
 end
