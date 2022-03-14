@@ -1,0 +1,15 @@
+<!--フォロー通知の表示：【部分テンプレート】-->
+<tr>
+  <td>
+    <!--フォローしたユーザ名とそのリンク-->
+      <%= link_to user_path(notification.visitor) do %>
+        <strong><%= notification.visitor.nickname %></strong>
+      <% end %>
+      <span>さんが、あなたをフォローしました。</span>
+  </td>
+  <td>
+    <!--通知を受信した時間の表示-->
+    <!--後日、日本語化する予定-->
+    <%= time_ago_in_words(notification.created_at) %>
+  </td>
+</tr>
