@@ -12,7 +12,7 @@ class GadgetsController < ApplicationController
 
     if @gadget.save
       # お気に入り登録に関連する通知レコードをデータベースに登録
-      gadget.create_notification_like!(current_user)
+      gadget.create_notification_favorite!(current_user)
       flash[:notice] = "ガジェット記事を投稿しました。"
       redirect_to gadgets_path
     else
@@ -76,12 +76,12 @@ class GadgetsController < ApplicationController
   end
 
    # お気に入り登録された後に通知を作成するメソッド
-  def create_notification_like!(temp_current_user)
+  def create_notification_favorite!(temp_current_user)
 
     # notificationsテーブルからwhere内の条件に一致するレコードを検索し、tempに格納
     temp = Notification.where(
       ["visitor_id = ? and visited_id = ? and gadget_id = ? and action = ?",
-      temp_current_user.id, user_id, id, Notification.action_types[:liked_to_own_post]
+      temp_current_user.id, user_id, id, Notification.action_types[:favorited_to_own_post]
       ])
 
     # notificationsテーブルに該当するレコードがない場合のみ、通知レコードを作成
@@ -91,7 +91,7 @@ class GadgetsController < ApplicationController
 
       # Notificationクラスの空のインスタンスを作成後、各カラムに値を追加
       notification = temp_current_user.active_notifications.new(
-        gadget_id: id,visited_id: user_id, action: Notification.action_types[:liked_to_own_post]
+        gadget_id: id,visited_id: user_id, action: Notification.action_types[:favorited_to_own_post]
         )
 
       # ユーザAが投稿したガジェット記事に対して、ユーザA自身がお気に入り登録した場合、通知済みとする

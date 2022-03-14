@@ -19,7 +19,7 @@ class Notification < ApplicationRecord
   # enumを使用したNotificationモデルの「action」の定義
   enum action_type: {
     commented_to_own_post: 0, # コメント
-    liked_to_own_post: 1, # いいね
+    favorited_to_own_post: 1, # お気に入り
     followed_me: 2 # フォロー
   }
 
