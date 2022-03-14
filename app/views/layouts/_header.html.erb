@@ -1,13 +1,13 @@
-<header>
+<header class="header sticky-top">
   <div class="toumei">
   <nav class="navbar navbar-expand-lg">
-    <div class="container">
+    <div class="container-fluid">
       <%= link_to root_path,class: "navbar-brand text-reset" do %>
         <i class="fas fa-robot"></i>
         <span class="font-weight-bold">Hagajet</span>
         <i class="fas fa-robot"></i>
       <% end %>
-      <div class="navbar-text mx-5 font-weight-bold">
+      <div class="navbar-text mx-5 font-weight-bold text-dark">
         <!--ログインユーザ名の表示-->
         <% if user_signed_in? %>
           <span>ようこそ、<%= current_user.nickname %> さん！</span>
@@ -16,7 +16,7 @@
         <% end %>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <i class="fas fa-caret-square-down"></i>
       </button>
       <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
@@ -24,31 +24,52 @@
             <!--ユーザがログインしている場合-->
             <li>
               <%= link_to user_path(current_user), class:"btn" do %>
-                  <i class="far fa-user-circle"></i>
+                <span class="fa-stack">
+                  <i class="far fa-user-circle fa-lg fa-stack-2x" style="font-size: 1em;"></i>
+                </span>
                 <span>マイページ</span>
               <% end %>
             </li>
             <li>
               <%= link_to user_notifications_path(current_user), class:"btn" do %>
-                  <i class="far fa-bell"></i>
-                <span>通知</span>
+                <div class="position-relative">
+                  <span class="fa-stack">
+                    <!--未読通知が存在するかで処理を分岐-->
+                    <% if unchecked_notifications.any? %>
+                      <i class="far fa-bell fa-lg fa-stack-2x" style="font-size: 1em;"></i>
+                      <span class="position-absolute">
+                        <i class="fas fa-exclamation-circle fa-stack-1x text-danger" style="font-size: 1.5em;"></i>
+                      </span>
+                    <% else %>
+                      <i class="far fa-bell fa-lg fa-stack-2x" style="font-size: 1em;"></i>
+                    <% end %>
+                  </span>
+                  <span>通知</span>
+                </div>
+
               <% end %>
             </li>
             <li>
               <%= link_to new_gadget_path, class:"btn" do %>
-                  <i class="fas fa-upload"></i>
+                <span class="fa-stack">
+                  <i class="fas fa-upload fa-lg fa-stack-2x" style="font-size: 1em;"></i>
+                </span>
                 <span>投稿する</span>
               <% end %>
             </li>
             <li>
               <%= link_to gadgets_path, class:"btn" do %>
-                  <i class="fas fa-list-alt"></i>
+                <span class="fa-stack">
+                  <i class="fas fa-list-alt fa-lg fa-stack-2x" style="font-size: 1em;"></i>
+                </span>
                 <span>投稿一覧</span>
               <% end %>
             </li>
             <li>
               <%= link_to destroy_user_session_path, class:"btn",method: :delete do %>
-                <i class="fas fa-sign-out-alt"></i>
+                <span class="fa-stack">
+                  <i class="fas fa-sign-out-alt fa-lg fa-stack-2x" style="font-size: 1em;"></i>
+                </span>
                 <span>ログアウト</span>
               <% end %>
             </li>
@@ -56,13 +77,17 @@
             <!--ユーザがログインしていない場合-->
             <li>
               <%= link_to new_user_registration_path, class:"btn" do %>
-                <i class="fas fa-user-plus"></i>
+                <span class="fa-stack">
+                  <i class="fas fa-user-plus fa-lg fa-stack-2x" style="font-size: 1em;"></i>
+                </span>
                 <span>新規登録</span>
               <% end %>
             </li>
             <li>
               <%= link_to new_user_session_path, class:"btn" do %>
-                <i class="fas fa-sign-in-alt"></i>
+                <span class="fa-stack">
+                  <i class="fas fa-sign-in-alt fa-lg fa-stack-2x" style="font-size: 1em;"></i>
+                </span>
                 <span>ログイン</span>
               <% end %>
             </li>
