@@ -29,6 +29,12 @@
               <% end %>
             </li>
             <li>
+              <%= link_to user_notifications_path(current_user), class:"btn" do %>
+                  <i class="far fa-bell"></i>
+                <span>通知</span>
+              <% end %>
+            </li>
+            <li>
               <%= link_to new_gadget_path, class:"btn" do %>
                   <i class="fas fa-upload"></i>
                 <span>投稿する</span>
