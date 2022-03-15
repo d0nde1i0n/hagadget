@@ -1,0 +1,22 @@
+ <div class="container">
+
+  <div class="d-flex justify-content-between mt-5">
+    <div class="h2">
+      <%= current_user.nickname%>さんへの通知一覧
+    </div>
+    <%= link_to user_path(current_user),class: "h5" do %>
+      <%= current_user.nickname %>さんのマイページに戻る
+    <% end %>
+  </div>
+
+  <!--通知一覧表示-->
+  <table class="table">
+    <% @notifications.each do |notification| %>
+      <%= render "notifications/#{Notification.action_types.key(notification.action)}",notification: notification %>
+      <!--Notification.action_types.key(notification.action)部分について-->
+      <!--「部分テンプレートのファイル名」と「enumに設定したアクション名」を同じにしているため、-->
+      <!--呼び出すテンプレートファイル名をenumを使用して指定している。-->
+    <% end %>
+  </table>
+
+ </div>

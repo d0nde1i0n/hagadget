@@ -22,6 +22,10 @@ class User < ApplicationRecord
   # 与フォロー関係を通じて、自分がフォローする人を参照するためのアソシエーション
   has_many :followings,through: :relationships, source: :followed
 
+  # 通知を送信する側とのアソシエーション
+  has_many :active_notifications,class_name: 'Notification',foreign_key: :visitor_id,dependent: :destroy
+  # 通知を受信する側とのアソシエーション
+  has_many :passive_notifications,class_name: 'Notification',foreign_key: :visited_id,dependent: :destroy
 
   # バリデーション（検証）
   validates :last_name,:first_name,:nickname,length: {minimum: 1, maximum: 10}
@@ -37,6 +41,30 @@ class User < ApplicationRecord
   def is_follower_by?(user)
     # フォローするユーザから見た中間テーブルのため、reverse_of_relationshipを指定。
     reverse_of_relationships.where(follower_id: user.id).exists?
+  end
+
+  # フォローされた後に通知を作成するメソッド
+  def create_notification_follow!(temp_current_user)
+
+    # notificationsテーブルからwhere内の条件に一致するレコードを検索し、tempに格納
+    temp = Notification.where(
+      ["visitor_id = ? and visited_id = ? and action = ?",
+        temp_current_user.id,id,Notification.action_types[:followed_me]
+      ])
+
+    # notificationsテーブルに該当するレコードがない場合のみ、通知レコードを作成
+    if temp.blank?
+      # 「.blank?」：対象オブジェクトが空白の場合にtrueを返すメソッド
+      # ここでいう「空白」とは、「空文字」、「空白」、「false」、「nil」を指す。
+
+      # Notificationクラスの空のインスタンスを作成後、各カラムに値を追加
+      notification = temp_current_user.active_notifications.new(
+        visited_id: id, action: Notification.action_types[:followed_me]
+      )
+
+      # バリデーションエラーがない場合のみ、データベースに通知レコードを登録する。
+      notification.save if notification.valid?
+    end
   end
 
 end

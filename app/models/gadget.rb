@@ -5,6 +5,7 @@ class Gadget < ApplicationRecord
   has_one_attached :gadget_image
   has_many :favorites,dependent: :destroy
   has_many :gadget_comments,dependent: :destroy
+  has_many :notifications,dependent: :destroy
 
   # バリデーション（検証）
   validates :name,:manufacture_name,:price,:score, presence: true
@@ -30,5 +31,65 @@ class Gadget < ApplicationRecord
     # where:指定した条件に一致するレコードを全て取得する
     # exit?:指定した条件が存在するか"true"or"false"で返す
     favorites.where(user_id: user.id).exists?
+  end
+
+  # お気に入り登録後に通知レコードを登録するメソッド
+  def create_notification_favorite!(temp_current_user)
+
+    # notificationsテーブルからwhere内の条件に一致するレコードを検索し、tempに格納
+    temp = Notification.where(
+      ["visitor_id = ? and visited_id = ? and gadget_id = ? and action = ?",
+      temp_current_user.id, user_id, id, Notification.action_types[:favorited_to_own_post]
+      ])
+
+    # notificationsテーブルに該当するレコードがない場合のみ、通知レコードを作成
+    if temp.blank?
+      # 「.blank?」：対象オブジェクトが空白の場合にtrueを返すメソッド
+      # ここでいう「空白」とは、「空文字」、「空白」、「false」、「nil」を指す。
+
+      # Notificationクラスの空のインスタンスを作成後、各カラムに値を追加
+      notification = temp_current_user.active_notifications.new(
+        gadget_id: id,visited_id: user_id, action: Notification.action_types[:favorited_to_own_post]
+        )
+
+      # ユーザAが投稿したガジェット記事に対して、ユーザA自身がお気に入り登録した場合、通知済みとする
+      # (上記の場合に、通知が送信されるのを防止するため)
+      notification.checked = true if notification.visitor_id == notification.visited_id
+
+      # バリデーションエラーがない場合のみ、データベースに通知レコードを登録する。
+      notification.save if notification.valid?
+    end
+  end
+
+  # コメント後に通知レコードを登録するメソッド
+  def create_notification_comment!(temp_current_user,temp_gadget_comment_id)
+
+    # コメントテーブルから。投稿ガジェット記事に対してコメントしているユーザ（自分以外）のレコードを取得
+    # 「distnct」:重複のない値を取得するメソッド
+    temp_ids = GadgetComment.select(:user_id).where(gadget_id: id).where.not(user_id: temp_current_user.id).distinct
+    # 投稿ガジェット記事にコメントしたユーザ全員に通知を送る
+    temp_ids.each do |temp_id|
+      save_notification_comment!(temp_current_user,temp_gadget_comment_id,temp_id['user_id'])
+    end
+
+    # 投稿ガジェットに対して初めてコメントされた場合、投稿者に通知を送る
+    save_notification_comment!(temp_current_user.temp_gadget_comment_id,user_id) if temp_ids.blank?
+  end
+
+   # コメント後に通知レコードを保存するメソッド
+  def save_notification_comment!(temp_current_user,temp_gadget_comment_id,temp_visited_id)
+    notification = temp_current_user.active_notifications.new(
+      gadget_id: id,
+      gadget_comment_id: temp_gadget_comment_id,
+      visited_id: temp_visited_id,
+      action: Notification.action_types[:commented_to_own_post]
+      )
+
+    # ユーザAが投稿したガジェット記事に対して、ユーザA自身がコメント投稿した場合、通知済みとする
+    # (上記の場合に、通知が送信されるのを防止するため)
+    notification.checked = true if notification.visitor_id == notification.visited_id
+
+    # バリデーションエラーがない場合のみ、データベースに通知レコードを登録する。
+    notification.save if notification.valid?
   end
 end

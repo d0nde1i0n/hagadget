@@ -7,7 +7,8 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:user_id])
     relationship = current_user.relationships.new(followed_id: @user.id)
     relationship.save
-
+    #フォロー後の通知レコードを登録
+    @user.create_notification_follow!(current_user)
   end
 
   def destroy
@@ -15,6 +16,5 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:user_id])
     relationship = current_user.relationships.find_by(followed_id: @user.id)
     relationship.destroy
-
   end
 end
