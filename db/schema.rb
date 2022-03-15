@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_14_052730) do
+ActiveRecord::Schema.define(version: 2022_03_15_050815) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 2022_03_14_052730) do
     t.index ["user_id"], name: "index_gadget_comments_on_user_id"
   end
 
+  create_table "gadget_tags", force: :cascade do |t|
+    t.integer "gadget_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gadget_id"], name: "index_gadget_tags_on_gadget_id"
+    t.index ["tag_id"], name: "index_gadget_tags_on_tag_id"
+  end
+
   create_table "gadgets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name"
@@ -101,6 +110,12 @@ ActiveRecord::Schema.define(version: 2022_03_14_052730) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -125,6 +140,8 @@ ActiveRecord::Schema.define(version: 2022_03_14_052730) do
   add_foreign_key "favorites", "users"
   add_foreign_key "gadget_comments", "gadgets"
   add_foreign_key "gadget_comments", "users"
+  add_foreign_key "gadget_tags", "gadgets"
+  add_foreign_key "gadget_tags", "tags"
   add_foreign_key "gadgets", "users"
   add_foreign_key "notifications", "gadget_comments"
   add_foreign_key "notifications", "gadgets"
