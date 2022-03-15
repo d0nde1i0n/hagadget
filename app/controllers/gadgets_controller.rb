@@ -2,7 +2,7 @@ class GadgetsController < ApplicationController
   before_action :authenticate_user!,except: [:index]
   before_action :set_gadget_info,only:[:show,:edit,:update,:destroy]
   before_action :ensure_correct_user,only: [:edit,:update,:destroy]
-  before_action :set_tag_list,only[:create,:update]
+  before_action :set_tag_list,only: [:create,:update]
 
   def new
     @gadget = Gadget.new
@@ -14,7 +14,7 @@ class GadgetsController < ApplicationController
     # before_action :set_tag_listで「tag_list」を取得
     if @gadget.save
       # お気に入り登録に関連する通知レコードをデータベースに登録
-      @gadget.save_tag(tag_list)
+      @gadget.save_tag(@tag_list)
       flash[:notice] = "ガジェット記事を投稿しました。"
       redirect_to gadgets_path
     else
@@ -44,7 +44,7 @@ class GadgetsController < ApplicationController
     # before_action :set_tag_listで「tag_list」を取得
     if @gadget.update(gadget_params)
       # タグ情報の更新処理
-      @gadget.save_tag(tag_list)
+      @gadget.save_tag(@tag_list)
       flash[:notice] = "対象の投稿記事情報を更新しました。"
       redirect_to gadget_path(@gadget)
     else
