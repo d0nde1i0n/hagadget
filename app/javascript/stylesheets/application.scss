@@ -8,21 +8,23 @@
   box-sizing: border-box;
 }
 
+body{
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
 //ヘッダーの背景画像
 header{
-  height: 10%;
   width: 100%;
   background-image: url("../images/israel-andrade-YI_9SivVt_s-unsplash.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-}
-
-// ヘッダー背景の透明化
-.toumei{
-  height: 100%;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
 }
 
 // フラッシュメッセージ
@@ -41,12 +43,15 @@ header{
 
 // フッターの背景画像
 footer{
-  height: 10%;
   width: 100%;
-  position: absolute;
-  bottom: 0;
   background-image: url("../images/israel-andrade-YI_9SivVt_s-unsplash.jpg");
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
+}
+
+// ヘッダー背景の透明化
+.toumei{
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
 }

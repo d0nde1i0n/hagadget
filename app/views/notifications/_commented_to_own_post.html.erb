@@ -1,0 +1,30 @@
+<!--コメント投稿通知の表示：【部分テンプレート】-->
+<tr>
+  <td>
+    <!--コメント投稿したユーザ名とそのリンク-->
+      <%= link_to user_path(notification.visitor) do %>
+        <strong><%= notification.visitor.nickname %></strong>
+      <% end %>
+      <span>さんが</span>
+      <!--コメント投稿されたガジェット記事のリンク-->
+      <%= link_to gadget_path(notification.gadget) do %>
+         <strong>
+           <!--「ガジェット記事にコメントした投稿ユーザ」と「ガジェット投稿したユーザ」が一致するかで処理を切り分け-->
+          <% if notification.gadget.user_id == notification.visited.id %>
+            <span>あなたの投稿</span>
+          <% else %>
+            <%= notification.visitor.nickname %>
+            <span>さんの投稿</span>
+          <% end %>
+         </strong>
+      <% end %>
+      <span>にコメントしました</span></br>
+      <!--投稿されたコメントの内容を表示-->
+      <span class="text-secondary"><%= notification.gadget_comment.comment %></span>
+  </td>
+  <td>
+    <!--通知を受信した時間の表示-->
+    <!--後日、日本語化する予定-->
+    <%= time_ago_in_words(notification.created_at) %>
+  </td>
+</tr>
