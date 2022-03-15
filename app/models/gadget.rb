@@ -6,6 +6,8 @@ class Gadget < ApplicationRecord
   has_many :favorites,dependent: :destroy
   has_many :gadget_comments,dependent: :destroy
   has_many :notifications,dependent: :destroy
+  has_many :gadget_tags,dependent: :destroy
+  has_many :tags,through: :gadget_tags
 
   # バリデーション（検証）
   validates :name,:manufacture_name,:price,:score, presence: true
