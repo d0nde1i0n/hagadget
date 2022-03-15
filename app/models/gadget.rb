@@ -6,6 +6,8 @@ class Gadget < ApplicationRecord
   has_many :favorites,dependent: :destroy
   has_many :gadget_comments,dependent: :destroy
   has_many :notifications,dependent: :destroy
+  has_many :gadget_tags,dependent: :destroy
+  has_many :tags,through: :gadget_tags
 
   # バリデーション（検証）
   validates :name,:manufacture_name,:price,:score, presence: true
@@ -91,5 +93,34 @@ class Gadget < ApplicationRecord
 
     # バリデーションエラーがない場合のみ、データベースに通知レコードを登録する。
     notification.save if notification.valid?
+  end
+
+  # 作成されたタグを登録するためのインスタンスメソッド
+  def save_tag(sent_tags)
+    # tagsテーブルに現在登録されているタグの要素をcurrent_tagsに配列情報として格納
+    # 「self.〇〇」：クラスメソッド。このファイルで言うと「self」は「Gadget」を指す。
+    # 「pluck」：引数に指定したカラムの値を配列として返すメソッド
+    current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    #「現在登録されているタグ情報」から「ユーザが記載したタグ情報」を引いたときに
+    # 残った要素を「古いタグ情報：old_tags」として格納
+    old_tags = current_tags - sent_tags
+    #「ユーザが記載したタグ情報」から「現在登録されているタグ情報」を引いたときに
+    # 残った要素を「新しいタグ情報：new_tags」として格納
+    new_tags = sent_tags - current_tags
+    
+    # 古いタグ情報を全て削除
+    old_tags.each do |old_name|
+      # old_nameをキーとしてタグテーブルから対象レコードを検索し、そのレコードを削除
+      self.tags.delete Tag.find_by(name:old_name)
+    end
+    
+    # 新しいタグ情報を全て登録
+    new_tags.each do |new_name|
+      # new_nameをキーとしてタグテーブルから対象レコードが存在するか検索した後、
+      #存在しない場合は新規作成、存在する場合はそのままの情報を変数に格納してそれぞれ保存。
+      gadget_tag = Tag.find_or_create_by(name:new_name)
+      self.tags << gadget_tag
+      # 「find_or_create_by」：条件を指定して初めの1件を取得し1件もなければクラスインスタンスを作成するメソッド
+    end
   end
 end
