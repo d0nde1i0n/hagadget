@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_051552) do
+ActiveRecord::Schema.define(version: 2022_03_14_052730) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +71,21 @@ ActiveRecord::Schema.define(version: 2022_03_13_051552) do
     t.index ["user_id"], name: "index_gadgets_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "gadget_id"
+    t.integer "gadget_comment_id"
+    t.integer "action"
+    t.boolean "checked", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gadget_comment_id"], name: "index_notifications_on_gadget_comment_id"
+    t.index ["gadget_id"], name: "index_notifications_on_gadget_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
+  end
+
   create_table "occupations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -111,6 +126,10 @@ ActiveRecord::Schema.define(version: 2022_03_13_051552) do
   add_foreign_key "gadget_comments", "gadgets"
   add_foreign_key "gadget_comments", "users"
   add_foreign_key "gadgets", "users"
+  add_foreign_key "notifications", "gadget_comments"
+  add_foreign_key "notifications", "gadgets"
+  add_foreign_key "notifications", "users", column: "visited_id"
+  add_foreign_key "notifications", "users", column: "visitor_id"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "users", "occupations"

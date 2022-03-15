@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visitor: one
+  visited: one
+  gadget: one
+  gadget_comment: one
+  action: 1
+  checked: false
+
+two:
+  visitor: two
+  visited: two
+  gadget: two
+  gadget_comment: two
+  action: 1
+  checked: false

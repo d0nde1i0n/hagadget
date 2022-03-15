@@ -11,6 +11,8 @@ class GadgetCommentsController < ApplicationController
     # ガジェット記事のidを変数に格納
     @gadget_comment.gadget_id = @gadget.id
     @gadget_comment.save
+    # コメント投稿の通知レコードを作成
+    @gadget_comment.gadget.create_notification_comment!(current_user,@gadget_comment.id)
 
   end
 

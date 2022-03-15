@@ -1,0 +1,20 @@
+<!--お気に入り登録通知の表示：【部分テンプレート】-->
+<tr>
+  <td>
+    <!--お気に入り登録したユーザ名とそのリンク-->
+      <%= link_to user_path(notification.visitor) do %>
+        <strong><%= notification.visitor.nickname %></strong>
+      <% end %>
+      <span>さんが</span>
+      <!--自身が投稿したガジェット記事のリンク-->
+      <%= link_to gadget_path(notification.gadget) do %>
+        <strong>あなたの投稿</strong>
+      <% end %>
+      <span>をお気に入り登録しました。</span>
+  </td>
+  <td>
+    <!--通知を受信した時間の表示-->
+    <!--後日、日本語化する予定-->
+    <%= time_ago_in_words(notification.created_at) %>
+  </td>
+</tr>

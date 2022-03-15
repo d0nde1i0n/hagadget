@@ -11,6 +11,7 @@ class GadgetsController < ApplicationController
     @gadget = current_user.gadgets.new(gadget_params)
 
     if @gadget.save
+      # お気に入り登録に関連する通知レコードをデータベースに登録
       flash[:notice] = "ガジェット記事を投稿しました。"
       redirect_to gadgets_path
     else
@@ -64,7 +65,7 @@ class GadgetsController < ApplicationController
     @gadget = Gadget.find(params[:id])
   end
 
-   def ensure_correct_user
+  def ensure_correct_user
     # before_actionで「@user」を取得
     # ログインユーザとユーザ詳細画面のユーザが一致しない場合は、ログインユーザのページに遷移
     unless @gadget.user == current_user
@@ -72,4 +73,5 @@ class GadgetsController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+
 end
