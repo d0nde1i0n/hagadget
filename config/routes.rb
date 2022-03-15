@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   # トップページへのルーティング
   root :to => 'homes#top'
   # 検索結果ページのルーティング
-  get '/search' => "searches#search"
 
   # ユーザ関連のルーティング
   resources :users, only: [:show,:edit,:update] do
@@ -24,5 +23,7 @@ Rails.application.routes.draw do
     resource :favorites,only: [:create,:destroy]
     resources :gadget_comments,only: [:create,:destroy]
   end
+
+  get "/search" => "searches#search"
 
 end
