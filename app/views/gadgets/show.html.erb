@@ -29,15 +29,8 @@
       <div class="row mb-2">
         <div class="col-4">タグ</div>
         <div class="col-8">
-          <!--ガジェット記事に紐づくタグが空かどうかで処理を分ける-->
-          <% unless @gadget.tags.blank? %>
-              <!--投稿記事に紐づくタグの数だけ処理を繰り返す-->
-              <% @gadget.tags.each do |tag| %>
-                  <!--タグ名を表示する-->
-                  <!--タグ名での検索は検索機能実装後に更新-->
-                  <%= link_to tag.name,gadgets_path(tag_id: tag.id),class: "btn btn-info"%>
-              <% end %>
-          <% end %>
+          <!--タグボタンのテンプレート-->
+          <%= render 'gadgets/tag_btns',gadget: @gadget %>
         </div>
       </div>
 
