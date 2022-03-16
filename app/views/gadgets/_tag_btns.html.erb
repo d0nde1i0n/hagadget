@@ -1,0 +1,9 @@
+<!--タグボタン：【部分テンプレート】-->
+<!--ガジェット記事に紐づくタグが空かどうかで処理を分ける-->
+<% unless gadget.tags.blank? %>
+  <!--投稿記事に紐づくタグの数だけ処理を繰り返す-->
+  <% gadget.tags.each do |tag| %>
+    <!--タグ名を表示する-->
+    <%= link_to "#{tag.name}",search_path(content: tag.name,model: 'tag'),class: "btn btn-outline-info btn-sm" %>
+  <% end %>
+<% end %>
