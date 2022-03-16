@@ -93,11 +93,10 @@
             </li>
           <% end %>
         </ul>
-        <!--検索（現段階ではオブジェクトのみ）-->
+        <!--検索-->
         <ul class="navbar-nav ml-auto">
-          <form id="form1" action="自分のサイトURL" method="get">
-          <input id="sbox1" id="s" name="s" type="text" placeholder="キーワードを入力" />
-          <input id="sbtn1" type="submit" value="検索" /></form>
+          <!--検索フォームの部分テンプレート-->
+          <%= render 'searches/form' %>
         </ul>
       </div>
     </div>
