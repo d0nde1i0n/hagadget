@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   # トップページへのルーティング
   root :to => 'homes#top'
-
+  # 検索結果ページのルーティング
+  get "/search" => "searches#search"
+  
   # ユーザ関連のルーティング
   resources :users, only: [:show,:edit,:update] do
     resources :relationships,only: [:create,:destroy]
@@ -22,4 +24,5 @@ Rails.application.routes.draw do
     resource :favorites,only: [:create,:destroy]
     resources :gadget_comments,only: [:create,:destroy]
   end
+
 end
