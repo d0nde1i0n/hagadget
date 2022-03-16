@@ -1,16 +1,25 @@
 <!--検索結果表示画面-->
-<% if @model == 'user' %>
-  <h3>Users Search for：<%= @content %></h3>
-  <% if @records.blank? %>
-    <p>No User matches the conditions</p>
-  <% else %>
-    <%= render 'users/index', users: @records %>
+<div class="container-fuluid m-3">
+
+  <h3>次の検索結果を表示しています：<%= @content %></h3>
+
+  <!--ユーザの検索結果-->
+  <% if @model == 'user' %>
+    <!--検索結果が空であるかを判定-->
+    <% if @records.blank? %>
+      <p>条件に一致するユーザは存在しません。</p>
+    <% else %>
+      <!--ユーザ一覧の部分テンプレート-->
+      <%= render 'users/index', users: @records %>
+    <% end %>
+  <!--ガジェット記事、またはタグの検索結果-->
+  <% else @model == 'gadget' || @model == 'tag'%>
+    <!--検索結果が空であるかを判定-->
+    <% if @records.blank? %>
+      <p>条件に一致するガジェット記事は存在しません。</p>
+    <% else %>
+      <!--ガジェット記事一覧の部分テンプレート-->
+      <%= render 'gadgets/index', gadgets: @records %>
+    <% end %>
   <% end %>
-<% else @model == 'gadget' %>
-  <h3>Books Search for：<%= @content %></h3>
-  <% if @records.blank? %>
-    <p>No User matches the conditions</p>
-  <% else %>
-    <%= render 'gadgets/index', gadgets: @records %>
-  <% end %>
-<% end %>
+</div>
