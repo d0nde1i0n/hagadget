@@ -1,12 +1,12 @@
 <!--検索結果表示画面-->
 <div class="container-fuluid m-3">
 
-  <h3>次の検索結果を表示しています：<%= @content %></h3>
+  <h2>次の検索結果を表示しています：<%= @content %></h2>
 
   <!--ユーザの検索結果-->
   <% if @model == 'user' %>
     <!--検索結果が空であるかを判定-->
-    <% if @records.blank? %>
+    <% if @records.blank? || @content.blank? %>
       <p>条件に一致するユーザは存在しません。</p>
     <% else %>
       <!--ユーザ一覧の部分テンプレート-->
@@ -15,7 +15,7 @@
   <!--ガジェット記事、またはタグの検索結果-->
   <% else @model == 'gadget' || @model == 'tag'%>
     <!--検索結果が空であるかを判定-->
-    <% if @records.blank? %>
+    <% if @records.blank? || @content.blank? %>
       <p>条件に一致するガジェット記事は存在しません。</p>
     <% else %>
       <!--ガジェット記事一覧の部分テンプレート-->
