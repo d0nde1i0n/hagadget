@@ -8,6 +8,6 @@ module GadgetsHelper
     direction = (db_column == sort_column && sort_direction == 'asc') ? 'desc' : 'asc'
     # データの並べ替え方法を変更するリンクの表示
     # パラメータとして引き渡す値に対応するキーとして「sort」と「direction」を設定
-    link_to title,{ sort: db_column, direction: direction}
+    link_to view_column,{ sort: db_column, direction: direction}
   end
 end
