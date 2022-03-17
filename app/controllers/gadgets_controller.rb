@@ -24,9 +24,9 @@ class GadgetsController < ApplicationController
   end
 
   def index
-    # order(order(created_at: :DESC)):作成日をキーとして降順に並び替えている
+    # order(order(#{sort_column} #{sort_direction}):カラム名、データの並べ替え手段をもとにデータを並び替える
     # page(params[:page]):ページネーションする際に必要な機能
-    @gadgets = Gadget.order(created_at: :DESC).page(params[:page])
+    @gadgets = Gadget.order("#{sort_column} #{sort_direction}").page(params[:page])
   end
 
   def show
