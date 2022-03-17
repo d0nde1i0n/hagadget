@@ -107,13 +107,13 @@ class Gadget < ApplicationRecord
     #「ユーザが記載したタグ情報」から「現在登録されているタグ情報」を引いたときに
     # 残った要素を「新しいタグ情報：new_tags」として格納
     new_tags = sent_tags - current_tags
-    
+
     # 古いタグ情報を全て削除
     old_tags.each do |old_name|
       # old_nameをキーとしてタグテーブルから対象レコードを検索し、そのレコードを削除
       self.tags.delete Tag.find_by(name:old_name)
     end
-    
+
     # 新しいタグ情報を全て登録
     new_tags.each do |new_name|
       # new_nameをキーとしてタグテーブルから対象レコードが存在するか検索した後、
@@ -123,20 +123,5 @@ class Gadget < ApplicationRecord
       # 「find_or_create_by」：条件を指定して初めの1件を取得し1件もなければクラスインスタンスを作成するメソッド
     end
   end
-  
-  # データ並べ替え手段の指定値を確認するメソッド
-  def self.sort_direction
-    # 受け取った値が指定する値かを判定する
-    # （「asc」、「desc」であればそのまま、その他の値を受け取った場合は「asc」を返す）
-    # 「%w」:文字列からなる配列を作成したいときに「[ ]」,「" "」を省略して記述するためのRubyの構文。
-    # 「include(指定値)」: 配列の要素に”指定値”が含まれているばTrueを返す。
-    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
-  end
-  
-  # データ並べ替え手段の対象となるカラム名を確認するメソッド
-  def self.sort_column
-    # 受け取った値がGadgetテーブルのカラム名と一致するかを判定する
-    # （一致するカラム名があればそのまま、その他の値を受け取った場合は: 'id'を返す）
-    Gadget.column_names.include?(params[:sort]) ? params[:sort] : 'id'
-  end
+
 end
