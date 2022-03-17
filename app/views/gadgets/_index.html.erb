@@ -2,11 +2,11 @@
 <table class="table">
     <thead>
       <tr class="font-weight-bold text-center">
-        <th style="width: 10%">投稿日</th>
+        <th style="width: 10%"><%= sort_order "created_at", "投稿日" %></th>
         <th style="width: 20%">投稿ユーザ名</th>
         <th style="width: 20%">投稿ガジェット名</th>
         <th style="width: 30%">タグ</th>
-        <th style="width: 10%">投稿ユーザの評価</th>
+        <th style="width: 10%"><%= sort_order "score", "投稿ユーザの評価" %></th>
         <th style="width: 10%">お気に入り数</th>
       </tr>
     </thead>
