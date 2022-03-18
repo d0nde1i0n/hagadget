@@ -86,7 +86,7 @@ class GadgetsController < ApplicationController
     @tag_list = params[:gadget][:tag_name].split(nil)
   end
 
-   # データ並べ替え手段の指定値を確認するメソッド
+  # データ並べ替え手段の指定値を確認するメソッド
   def sort_direction
     # 受け取った値が指定する値かを判定する
     # （「asc」、「desc」であればそのまま、その他の値を受け取った場合は「asc」を返す）

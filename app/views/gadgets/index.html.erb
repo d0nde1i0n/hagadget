@@ -4,6 +4,20 @@
     <h2>ガジェット記事一覧</h2>
   </div>
 
+  <!--投稿日の昇順/降順切替え-->
+  <div class="row ml-auto mb-3 d-flex justify-content-end">
+    <div>
+      <span class="font-weight-bold">投稿日: </span>
+      <%= sort_asc("create_at") %>
+      <%= sort_desc("create_at") %>
+    </div>
+    <div class="ml-3">
+      <span class="font-weight-bold">投稿ユーザの評価: </span>
+      <%= sort_asc("score") %>
+      <%= sort_desc("score") %>
+    </div>
+  </div>
+
   <!--ガジェット一覧テーブルの部分テンプレート-->
   <%= render 'gadgets/index',gadgets: @gadgets %>
 </div>
