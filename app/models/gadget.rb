@@ -107,13 +107,13 @@ class Gadget < ApplicationRecord
     #「ユーザが記載したタグ情報」から「現在登録されているタグ情報」を引いたときに
     # 残った要素を「新しいタグ情報：new_tags」として格納
     new_tags = sent_tags - current_tags
-    
+
     # 古いタグ情報を全て削除
     old_tags.each do |old_name|
       # old_nameをキーとしてタグテーブルから対象レコードを検索し、そのレコードを削除
       self.tags.delete Tag.find_by(name:old_name)
     end
-    
+
     # 新しいタグ情報を全て登録
     new_tags.each do |new_name|
       # new_nameをキーとしてタグテーブルから対象レコードが存在するか検索した後、
@@ -123,4 +123,5 @@ class Gadget < ApplicationRecord
       # 「find_or_create_by」：条件を指定して初めの1件を取得し1件もなければクラスインスタンスを作成するメソッド
     end
   end
+
 end
