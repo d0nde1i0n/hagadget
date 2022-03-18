@@ -1,13 +1,15 @@
 module GadgetsHelper
 
-  # ガジェット一覧のソート機能に関連するヘルパーメソッド
-  def sort_order(db_column, view_column)
-    # データの並べ替え方法を決める
-    #　昇順の場合は降順に、逆の場合は昇順になるような値を変数「direction」に格納
-    # （DB上のカラム名とソート対象となるカラム名が一致していることが前提）
-    direction = (db_column == sort_column && sort_direction == 'asc') ? 'desc' : 'asc'
-    # データの並べ替え方法を変更するリンクの表示
-    # パラメータとして引き渡す値に対応するキーとして「sort」と「direction」を設定
-    link_to view_column,{ sort: db_column, direction: direction}
+  # ガジェット一覧のソート機能の表示部分に関連するヘルパーメソッド
+
+  # データの並び替え順を昇順に変更するリンクを表示するメソッド
+  def sort_asc(column_to_be_sorted)
+    link_to "昇順", {:column => column_to_be_sorted, :direction => "asc"},class: "btn btn-outline-primary btn-sm"
   end
+
+  # データの並び替え順を降順に変更するリンクを表示するメソッド
+  def sort_desc(column_to_be_sorted)
+    link_to "降順", {:column => column_to_be_sorted, :direction => "desc"},class: "btn btn-outline-primary btn-sm"
+  end
+
 end
