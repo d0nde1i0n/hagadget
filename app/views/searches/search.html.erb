@@ -4,7 +4,7 @@
   <h2>次の検索結果を表示しています：<%= @content %></h2>
 
   <!--ユーザの検索結果-->
-  <% if @model == 'user' %>
+  <% if @model == 'user' || @model == 'occupation' %>
     <!--検索結果が空であるかを判定-->
     <% if @records.blank? || @content.blank? %>
       <p>条件に一致するユーザは存在しません。</p>
