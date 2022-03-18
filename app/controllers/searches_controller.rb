@@ -11,11 +11,11 @@ class SearchesController < ApplicationController
 
   # テーブルから検索条件に一致するレコードを収集するインスタンスメソッド
   def search_for(model,content)
-    # モデル別に処理を分岐、あいまい検索(LIKE)条件は「完全一致」のみとしている。
+    # モデル別に処理を分岐、あいまい検索(LIKE)条件は「完全一致」,「部分一致」のみとしている。
 
     # ユーザ（ユーザ名）の場合
     if model == 'user'
-      User.where('nickname LIKE ?',content)
+      User.where('nickname LIKE ?','%'+content+'%')
 
     # ユーザ（職種名）の場合
     elsif model == 'occupation'
@@ -24,7 +24,7 @@ class SearchesController < ApplicationController
 
     # ガジェット（ガジェット名）の場合
     elsif model == 'gadget'
-      Gadget.where('name LIKE ?',content)
+      Gadget.where('name LIKE ?','%'+content+'%')
 
     # ガジェット（タグ名）の場合
     elsif model == 'tag'
