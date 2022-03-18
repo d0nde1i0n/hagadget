@@ -11,17 +11,24 @@ class SearchesController < ApplicationController
 
   # テーブルから検索条件に一致するレコードを収集するインスタンスメソッド
   def search_for(model,content)
-    # モデル別に処理を分岐、あいまい検索(LIKE)条件は「部分一致」のみとしている。
+    # モデル別に処理を分岐、あいまい検索(LIKE)条件は「完全一致」のみとしている。
 
-    # ユーザの場合
+    # ユーザ（ユーザ名）の場合
     if model == 'user'
-      User.where('nickname LIKE ?','%'+content+'%')
+      User.where('nickname LIKE ?',content)
+
+    # ユーザ（職種名）の場合
+    elsif model == 'occupation'
+      occupation = Occupation.select(:id).where('name LIKE ?',content)
+      User.where(occupation_id: occupation)
+
     # ガジェット（ガジェット名）の場合
     elsif model == 'gadget'
-      Gadget.where('name LIKE ?','%'+content+'%')
+      Gadget.where('name LIKE ?',content)
+
     # ガジェット（タグ名）の場合
     elsif model == 'tag'
-      tags = Tag.where('name LIKE ?','%'+content+'%')
+      tags = Tag.where('name LIKE ?',content)
       # 検索条件のタグ名に紐づくガジェット記事を、配列「gadget_articles」に格納
       # 「ingect」：たたみ込み演算を行うメソッド（eachメソッドよりもコードが短くなる）
       gadget_articles = tags.inject(init = []) {|result, tag| result + tag.gadgets}
