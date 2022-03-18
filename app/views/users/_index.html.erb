@@ -1,11 +1,12 @@
 <table class="table mt-3">
   <thead>
     <tr class="text-center">
-      <th style="width: 40%">ユーザ名</th>
-      <th style="width: 15%">投稿ガジェット数</th>
-      <th style="width: 15%">フォロー数</th>
-      <th style="width: 15%">フォロワー数</th>
-      <th style="width: 15%"> <!--フォロー/フォロー解除ボタン--></th>
+      <th style="width: 30%">ユーザ名</th>
+      <th style="width: 30%">職種</th>
+      <th style="width: 10%">投稿ガジェット数</th>
+      <th style="width: 10%">フォロー数</th>
+      <th style="width: 10%">フォロワー数</th>
+      <th style="width: 10%"> <!--フォロー/フォロー解除ボタン--></th>
 
     </tr>
   </thead>
@@ -19,6 +20,10 @@
                 class: "rounded-circle border border-info border-3"%>
             <%= user.nickname %>
           <% end %>
+        </td>
+        <!--職種-->
+        <td class="text-center h4">
+          <%= render 'users/occupation_btn',user: user %>
         </td>
         <!--投稿ガジェット数-->
         <td class="text-center h4">
