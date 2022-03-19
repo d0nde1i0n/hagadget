@@ -18,11 +18,11 @@ class Customized::SessionsController < Devise::SessionsController
 
     # newアクションが呼び出された時、format.〇〇によって処理を定義する
     # 「respond_to」：リクエストの形式(HTMLやJSONなど)によって処理・レンダリングを変えるメソッド
-    respond_to do |format|
-      # 今回は処理・レンダリングの変更は不要（devise.rbで設定変更しているため）
-      format.js
-      format.html
-    end
-
+    # devise.rbで設定変更していることから,respond_to部分が不要と判断しコメントアウトした。
+    # respond_to do |format|
+    #   # 今回は処理・レンダリングの変更は不要
+    #   format.js
+    #   format.html
+    # end
   end
 end
