@@ -32,7 +32,7 @@ class Gadget < ApplicationRecord
   def favorited_by?(user)
     # where:指定した条件に一致するレコードを全て取得する
     # exit?:指定した条件が存在するか"true"or"false"で返す
-    favorites.where(user_id: user.id).exists?
+    favorites.where(user_id: user.id).exists? unless user.nil?
   end
 
   # お気に入り登録後に通知レコードを登録するメソッド
