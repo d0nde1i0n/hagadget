@@ -1,0 +1,2 @@
+module Customized::SessionsHelper
+end
