@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  # devise関連のルーティング
+  devise_for :users,controllers: {
+    # sessionsコントローラをオーバーライドしたいため、設定ファイルが記載されたパスを指定
+    sessions: 'customized/sessions'
+  }
+  
   # トップページへのルーティング
   root :to => 'homes#top'
   # 検索結果ページのルーティング
   get "/search" => "searches#search"
-  
+
   # ユーザ関連のルーティング
   resources :users, only: [:show,:edit,:update] do
     resources :relationships,only: [:create,:destroy]

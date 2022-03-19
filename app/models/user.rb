@@ -40,7 +40,7 @@ class User < ApplicationRecord
   # reverse_of_relationshipsテーブルのカラムfollower_idにuser.idが存在するかを確認するメソッド
   def is_follower_by?(user)
     # フォローするユーザから見た中間テーブルのため、reverse_of_relationshipを指定。
-    reverse_of_relationships.where(follower_id: user.id).exists?
+    reverse_of_relationships.where(follower_id: user.id).exists? unless user.nil?
   end
 
   # フォローされた後に通知を作成するメソッド
