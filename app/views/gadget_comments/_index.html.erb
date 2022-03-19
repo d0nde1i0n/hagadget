@@ -18,9 +18,12 @@
         </td>
 
         <td style="width: 15%">
-          <%= link_to "コメント削除",gadget_gadget_comment_path(gadget_comment.gadget,gadget_comment),
+          <!--ゲストはガジェット記事詳細を閲覧可能だが、ユーザ情報を持っていないため判断条件を追加-->
+          <% if gadget_comment.user == current_user && current_user != nil%>
+            <%= link_to "コメント削除",gadget_gadget_comment_path(gadget_comment.gadget,gadget_comment),
               data: {confirm: "本当に対象コメントを削除しますか？"},class: "btn btn-danger",
               method: :delete,remote: true%>
+          <% end %>
         </td>
       </tr>
     </tbody>
