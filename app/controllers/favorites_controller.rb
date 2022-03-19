@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     # viewから受け渡された「gadget_id」をキーとして、対象となるガジェット投稿記事を格納
