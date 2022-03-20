@@ -1,0 +1,7 @@
+<!--コメント投稿エラー時の非同期処理-->
+
+<!--fadeOut処理になっている可能性があるため、再表示する処理を追加-->
+$("#gadget_comment_error").show();
+
+<!--エラーメッセージエリアを表示する-->
+$("#gadget_comment_error").html("<%= j(render 'layouts/error_message', model: @gadget_comment) %>");

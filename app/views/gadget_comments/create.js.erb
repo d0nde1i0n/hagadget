@@ -1,8 +1,14 @@
 <!--コメント送信後の非同期処理-->
 
+<!--エラーメッセージエリアの初期化-->
+<!--（非同期処理で表示されるため、初期化する必要がある）-->
+$("#gadget_comment_error").fadeOut(1)
+
 <!--コメント件数の再描画処理-->
 $("#gadget-comment-count").html("<%= @gadget_comments.count %>");
+
 <!--コメント一覧の再描画処理-->
 $("#comment-display-area").html("<%= j(render 'gadget_comments/index',gadget_comments: @gadget_comments) %>");
+
 <!--投稿コメントのテキストエリアを初期化-->
 $("textarea").val("");

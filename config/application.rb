@@ -10,6 +10,14 @@ module Hagadget
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+
+    # デフォルトのロケールを「:en」から「:ja」に変更
+    config.i18n.default_locale = :ja
+    # I18nライブラリに訳文の探索場所を支持する
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
+
+    # /libファイル以下を自動でロードする
+    # 「config.autoload_paths」：オートロード対象となるパスを追加
     config.autoload_paths += %W(#{config.root}/lib)
 
     # Configuration for the application, engines, and railties goes here.
