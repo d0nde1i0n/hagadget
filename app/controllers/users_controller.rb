@@ -21,6 +21,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
     else
       flash[:alert] = "ユーザ情報の更新に失敗しました。"
+      render 'edit'
     end
   end
 

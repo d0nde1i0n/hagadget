@@ -6,6 +6,9 @@
 
   <%= form_with model: @gadget,url: gadget_path(@gadget),method: :patch,local: true do |f| %>
 
+    <!--エラーメッセージの表示（バリデーションにヒットした場合のみ）-->
+    <%= render 'layouts/error_message',model: f.object %>
+
     <!--ガジェット名-->
     <div class ="form-group row ml-2 mt-3">
       <div class="form-title col-3 ml-2 mt-3">

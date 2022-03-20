@@ -10,10 +10,14 @@ class GadgetCommentsController < ApplicationController
     @gadget_comment = current_user.gadget_comments.new(gadget_comment_params)
     # ガジェット記事のidを変数に格納
     @gadget_comment.gadget_id = @gadget.id
-    @gadget_comment.save
-    # コメント投稿の通知レコードを作成
-    @gadget_comment.gadget.create_notification_comment!(current_user,@gadget_comment.id)
 
+    if  @gadget_comment.save
+      # コメント投稿の通知レコードを作成
+      @gadget_comment.gadget.create_notification_comment!(current_user,@gadget_comment.id)
+    else
+      # 非同期処理エラー時の動作を設定したjsファイルを指定
+      render 'create_error'
+    end
   end
 
   def destroy

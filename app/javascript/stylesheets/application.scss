@@ -55,3 +55,31 @@ footer{
   width: 100%;
   background-color: rgba(255, 255, 255, 0.5);
 }
+
+// バリデーションエラーの対象箇所に付与されるクラスのスタイル
+.field_with_errors {
+  //対象タグが存在しない扱いになる。（ここでの対象は、field_with_errorsタグ）
+  display: contents;
+  // inputタグに「is-invalid」タグを追加を追加？
+  input {
+    @extend .is-invalid;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: red;
+    background-color: #FFE4E1;
+  }
+}
+
+// エラーメッセージの表示エリアのスタイルを設定
+.error_message_area,#error_explanation {
+  color: #DC143C;
+  border-width: 3px;
+  border-radius: 5px;
+  background-color: #FFE4E1;
+}
+
+// ::marker「●」を消すための設定
+ul {
+  list-style: none;
+}

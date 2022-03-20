@@ -8,6 +8,10 @@
   </div>
 
     <%= form_with model: @user,url: user_path(@user),method: :patch,local: true do |f| %>
+
+      <!--エラーメッセージの表示（バリデーションにヒットした場合のみ）-->
+      <%= render 'layouts/error_message',model: f.object %>
+
       <!--名前-->
       <div class="form-group row ml-2 mt-3">
         <div class="form-title col-3 ml-2 mt-3">
@@ -20,7 +24,7 @@
           <%= f.text_field :first_name%>
         </div>
       </div>
-      
+
       <!--ニックネーム-->
       <div class ="form-group row ml-2 mt-3">
         <div class="form-title col-3 ml-2 mt-3">

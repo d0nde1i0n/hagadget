@@ -103,6 +103,12 @@
     </div>
   </div>
 
+    <!--エラーメッセージ表示エリアの部分テンプレート-->
+    <div id="gadget_comment_error">
+      <%= render 'layouts/error_message',model: @gadget_comment %>
+    </div>
+
+
     <!--コメント一覧-->
     <div class="row">
       <div class="h4">
@@ -112,6 +118,8 @@
       </div>
       <%= render 'gadget_comments/index',gadget_comments: @gadget_comments %>
     </div>
+
+
 
     <!--コメント投稿-->
     <% unless current_user.nil? %>
