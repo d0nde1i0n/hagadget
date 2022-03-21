@@ -1,5 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+// 使用するフォントのurl(Googleフォント)
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
 
 // CSSの初期化
 *{
@@ -12,6 +14,7 @@ body{
   display: flex;
   flex-flow: column;
   min-height: 100vh;
+  font-family: 'Yusei Magic', sans-serif;　//フォントの指定
 }
 
 main {
@@ -21,7 +24,7 @@ main {
 //ヘッダーの背景画像
 header{
   width: 100%;
-  background-image: url("../images/KAZ19514003_TP_V4.jpg");
+  background-image: url("../../assets/images/KAZ19514003_TP_V4.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -44,7 +47,7 @@ header{
 // フッターの背景画像
 footer{
   width: 100%;
-  background-image: url("../images/KAZ19514003_TP_V4.jpg");
+  background-image: url("../../assets/images/KAZ19514003_TP_V4.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
