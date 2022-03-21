@@ -8,8 +8,8 @@
 
     <!--プロフィール画像-->
     <div class="col-2">
-      <div class="profile-image rounded-circle border border-3 border-info">
-        <%= image_tag @user.get_profile_image, size:"150x150" %>
+      <div class="profile-image">
+        <%= image_tag @user.get_profile_image,class: "rounded-circle border border-3 border-info",size:"150x150" %>
       </div>
     </div>
 
