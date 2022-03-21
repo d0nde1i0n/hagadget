@@ -7,7 +7,7 @@
   <%= form_with model: @gadget,url: gadgets_path,method: :post,local: true do |f| %>
 
     <!--エラーメッセージの表示（バリデーションにヒットした場合のみ）-->
-    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= render "layouts/error_message", model: f.object%>
 
     <!--ガジェット名-->
     <div class ="form-group row ml-2 mt-3">
