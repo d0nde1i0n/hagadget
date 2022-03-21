@@ -16,7 +16,7 @@ class Gadget < ApplicationRecord
   # メソッド
   # ファイルが添付されているかを確認し、添付されていない場合には指定のファイルを添付するメソッド
   def get_gadget_image
-    (gadget_image.attached?) ? gadget_image : 'no_image'
+    (gadget_image.attached?) ? gadget_image : 'no_gadget_image'
   end
 
   # DBから取得した投稿日を整形するためのメソッド
