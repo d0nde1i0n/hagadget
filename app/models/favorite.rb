@@ -8,5 +8,5 @@ class Favorite < ApplicationRecord
 
   # validates_uniqueness_of：値が重複していないかを検証
   # scope:一意性チェックの範囲を限定する別の属性を指定
-  validates_uniqueness_of :gadget_id, scope: :user_id
+  validates_uniqueness_of :gadget_id,scope: user_id
 end
