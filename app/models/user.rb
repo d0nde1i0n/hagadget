@@ -34,7 +34,7 @@ class User < ApplicationRecord
   # メソッド
   # ファイルが添付されているかを確認し、添付されていない場合には指定のファイルを添付するメソッド
   def get_profile_image
-    (profile_image.attached?) ? profile_image : 'no_profile_image'
+    (profile_image.attached?) ? profile_image : 'no_profile_image.png'
   end
 
   # reverse_of_relationshipsテーブルのカラムfollower_idにuser.idが存在するかを確認するメソッド
