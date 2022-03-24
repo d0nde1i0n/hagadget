@@ -1,8 +1,8 @@
- <div class="container">
+ <div class="container-fluid">
 
-  <div class="d-flex justify-content-between mt-5">
+  <div class="d-flex justify-content-between mt-3">
     <div class="h2">
-      <%= @user.nickname%>さんがフォロー中
+      <span class="page_title"><%= @user.nickname%>さんがフォロー中</span>
     </div>
     <%= link_to user_path(@user),class: "h5" do %>
       <%= @user.nickname %>さんのマイページに戻る
