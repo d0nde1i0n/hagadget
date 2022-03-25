@@ -103,8 +103,20 @@
     </div>
   </div>
 
+  <div class="mx-auto mt-3 w-100">
+    <h3>ガジェットの使用感等</h3>
+    <% unless @gadget.description.blank? %>
+      <div>
+        <!--受領したデータを配列化し、要素ごとに改行して表示する-->
+        <%= safe_join(@gadget.description.split("\n"),tag(:br)) %>
+      </div>
+    <% else %>
+      <p>ユーザ紹介文が登録されていません</p>
+    <% end %>
+  </div>
+
     <!--エラーメッセージ表示エリアの部分テンプレート-->
-    <div id="gadget_comment_error">
+    <div id="gadget_comment_error" class="mt-3">
       <%= render 'layouts/error_message',model: @gadget_comment %>
     </div>
 

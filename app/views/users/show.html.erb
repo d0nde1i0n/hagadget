@@ -1,3 +1,4 @@
+<!--ユーザ情報画面-->
 <div class="container">
 
   <div class="site-title mt-3">
@@ -60,14 +61,15 @@
     <div class="mx-auto mt-3 w-100">
       <h3>ユーザ紹介文</h3>
       <% unless @user.introduction.blank? %>
-        <div class="border border-info">
-          <%= @user.introduction %>
+        <div>
+          <!--受領したデータを配列化し、要素ごとに改行して表示する-->
+          <%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
         </div>
       <% else %>
         <p>ユーザ紹介文が登録されていません</p>
       <% end %>
-
     </div>
+    
   </div>
 
   <!--ユーザの投稿一覧-->
