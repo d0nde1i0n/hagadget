@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        last_name: 名前(性)
+        first_name: 名前(名)
+        nickname: ニックネーム
+        introduction: ユーザ紹介文
+      gadget:
+        name: ガジェット名
+        manufacture_name: メーカ名
+        price: 参考価格
+        score: 評価
+        description: ガジェットの使用感
+      gadget_comment:
+        comment: 投稿コメント
