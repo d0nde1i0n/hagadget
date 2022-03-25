@@ -66,7 +66,7 @@ class Gadget < ApplicationRecord
   # コメント後に通知レコードを登録するメソッド
   def create_notification_comment!(temp_current_user,temp_gadget_comment_id)
 
-    # コメントテーブルから。投稿ガジェット記事に対してコメントしているユーザ（自分以外）のレコードを取得
+    # コメントテーブルから、投稿ガジェット記事に対してコメントしているユーザ（自分以外）のレコードを取得
     # 「distnct」:重複のない値を取得するメソッド
     temp_ids = GadgetComment.select(:user_id).where(gadget_id: id).where.not(user_id: temp_current_user.id).distinct
     # 投稿ガジェット記事にコメントしたユーザ全員に通知を送る
@@ -75,7 +75,7 @@ class Gadget < ApplicationRecord
     end
 
     # 投稿ガジェットに対して初めてコメントされた場合、投稿者に通知を送る
-    save_notification_comment!(temp_current_user.temp_gadget_comment_id,user_id) if temp_ids.blank?
+    save_notification_comment!(temp_current_user,temp_gadget_comment_id,user_id) if temp_ids.blank?
   end
 
    # コメント後に通知レコードを保存するメソッド
