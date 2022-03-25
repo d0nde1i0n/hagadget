@@ -19,6 +19,7 @@ body{
 
 main {
   flex: 1;
+  background-color: #fff9f4;
 }
 
 //ヘッダーの背景画像
@@ -56,7 +57,7 @@ footer{
 // ヘッダー背景の透明化
 .toumei{
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 // バリデーションエラーの対象箇所に付与されるクラスのスタイル
@@ -85,4 +86,9 @@ footer{
 // ::marker「●」を消すための設定
 ul {
   list-style: none;
+}
+
+// 各ページタイトルのスタイル
+.page_title{
+   box-shadow:0px -6px 5px -5px #ff3300 inset,0px 8px 4px -8px #000000;
 }

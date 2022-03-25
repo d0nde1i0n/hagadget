@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!,except: [:show]
+  before_action :authenticate_user!,except: [:show,:followers,:followings]
   before_action :set_user_info,only:[:show,:edit,:update,:followers,:followings,:ensure_correct_user]
   before_action :ensure_correct_user,only: [:edit,:update]
 

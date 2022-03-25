@@ -1,5 +1,5 @@
-<table class="table mt-3">
-  <thead>
+<table class="table table table-hover table-sm mt-3">
+  <thead class="thead-dark">
     <tr class="text-center">
       <th style="width: 30%">ユーザ名</th>
       <th style="width: 30%">職種</th>
@@ -12,9 +12,9 @@
   </thead>
   <tbody>
     <% users.each do |user| %>
-      <tr>
+      <tr class="text-center">
         <!--ユーザ名-->
-        <td class="h5">
+        <td>
           <%= link_to user_path(user) do %>
             <%= image_tag user.get_profile_image,size: "50x50",
                 class: "rounded-circle border border-info border-3"%>
@@ -22,19 +22,19 @@
           <% end %>
         </td>
         <!--職種-->
-        <td class="text-center h4">
+        <td>
           <%= render 'users/occupation_btn',user: user %>
         </td>
         <!--投稿ガジェット数-->
-        <td class="text-center h4">
+        <td>
           <%= user.gadgets.count %>
         </td>
         <!--フォロー数-->
-        <td class="text-center h4">
+        <td>
           <%= user.followings.count %>
         </td>
         <!--フォロワー数-->
-        <td class="text-center h4">
+        <td>
           <!--フォロワー数の部分テンプレート-->
           <%= render 'users/number_of_followers',user: user %>
         </td>

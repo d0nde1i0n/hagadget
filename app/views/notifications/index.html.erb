@@ -1,16 +1,14 @@
  <div class="container">
 
-  <div class="d-flex justify-content-between mt-5">
+  <div class="d-flex justify-content-between mt-3">
     <div class="h2">
-      <%= current_user.nickname%>さんへの通知一覧
+      <span class="page_title">通知一覧<span class="page_title">
     </div>
-    <%= link_to user_path(current_user),class: "h5" do %>
-      <%= current_user.nickname %>さんのマイページに戻る
-    <% end %>
+    <%= link_to 'マイページへ戻る',user_path(current_user),class: "h5"%>
   </div>
 
   <!--通知一覧表示-->
-  <table class="table">
+  <table class="table table table-hover table-sm mt-3">
     <% @notifications.each do |notification| %>
       <%= render "notifications/#{Notification.action_types.key(notification.action)}",notification: notification %>
       <!--Notification.action_types.key(notification.action)部分について-->

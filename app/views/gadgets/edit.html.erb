@@ -1,7 +1,10 @@
 <div class="container">
 
-  <div class="site-title mt-3">
-    <h2>投稿記事編集</h2>
+  <div class="row d-flex mt-5">
+      <h2><span class="page_title">ガジェット記事の編集</span></h2>
+      <div class="ml-auto">
+        <%= link_to "ガジェット記事へ戻る",gadget_path(@gadget),class: "h4"%>
+      </div>
   </div>
 
   <%= form_with model: @gadget,url: gadget_path(@gadget),method: :patch,local: true do |f| %>
@@ -32,7 +35,7 @@
     <!--タグ-->
     <div class ="form-group row ml-2 mt-3">
       <div class="form-title col-3 ml-2 mt-3">
-        <%= f.label :tag_name,"タグ",class: "h4" %>
+        <%= f.label :tag_name,"タグ",placeholder: "例：デジタル 時計" ,class: "h4" %>
       </div>
       <div class="form-field col-8 ml-2 mt-3">
         <%= f.text_field :tag_name %>
