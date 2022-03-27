@@ -11,7 +11,7 @@ FactoryBot.define do
       score = ones_place
     elsif 0.3 <= about_a_tenth && about_a_tenth < 0.6
       score = ones_place + 0.5
-    elsif 0.6 <= ones_place
+    elsif 0.6 <= about_a_tenth
       score = ones_place + 1
     end
     # 処理おわり
