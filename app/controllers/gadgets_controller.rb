@@ -99,6 +99,6 @@ class GadgetsController < ApplicationController
   def sort_column
     # 受け取った値がGadgetテーブルのカラム名と一致するかを判定する
     # （一致するカラム名があればそのまま、その他の値を受け取った場合は: 'id'を返す）
-    Gadget.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+    Gadget.column_names.include?(params[:column]) ? params[:column] : 'id'
   end
 end
