@@ -7,13 +7,13 @@
       <% end %>
       <span>さんが</span>
       <!--コメント投稿されたガジェット記事のリンク-->
-      <%= link_to gadget_path(notification.gadget) do %>
+      <%= link_to gadget_path(notification.gadget_comment.gadget_id) do %>
          <strong>
            <!--「ガジェット記事にコメントした投稿ユーザ」と「ガジェット投稿したユーザ」が一致するかで処理を切り分け-->
-          <% if notification.gadget.user_id == notification.visited.id %>
+          <% if notification.gadget_comment.user_id == notification.visited.id %>
             <span>あなたの投稿</span>
           <% else %>
-            <%= notification.visitor.nickname %>
+            <%= notification.visited.nickname %>
             <span>さんの投稿</span>
           <% end %>
          </strong>
