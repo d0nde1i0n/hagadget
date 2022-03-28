@@ -18,7 +18,7 @@ class GadgetsController < ApplicationController
       # お気に入り登録に関連する通知レコードをデータベースに登録
       @gadget.save_tag(@tag_list)
       flash[:notice] = "ガジェット記事を投稿しました。"
-      redirect_to gadgets_path
+      redirect_to gadget_path(@gadget)
     else
       flash[:alert] = "ガジェット記事の投稿ができませんでした。"
       render new_gadget_path
@@ -99,6 +99,6 @@ class GadgetsController < ApplicationController
   def sort_column
     # 受け取った値がGadgetテーブルのカラム名と一致するかを判定する
     # （一致するカラム名があればそのまま、その他の値を受け取った場合は: 'id'を返す）
-    Gadget.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+    Gadget.column_names.include?(params[:column]) ? params[:column] : 'id'
   end
 end

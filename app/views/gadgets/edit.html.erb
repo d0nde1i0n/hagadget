@@ -38,7 +38,11 @@
         <%= f.label :tag_name,"タグ",placeholder: "例：デジタル 時計" ,class: "h4" %>
       </div>
       <div class="form-field col-8 ml-2 mt-3">
-        <%= f.text_field :tag_name %>
+        <% unless @gadget.tags.blank? %>
+          <%= f.text_field :tag_name,value: @gadget.display_multiple_tags(@gadget.tags) %>
+        <% else %>
+          <%= f.text_field :tag_name %>
+        <% end %>
       </div>
     </div>
 

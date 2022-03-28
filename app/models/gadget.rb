@@ -124,4 +124,16 @@ class Gadget < ApplicationRecord
     end
   end
 
+  # 編集画面で表示するタグを取得し、文字列を生成するインスタンスメソッド
+  def display_multiple_tags(current_tags)
+    # 配列の初期化
+    display_tags = []
+    # 投稿記事に紐づくタグの数だけ、配列に「タグ名」を格納する。
+    current_tags.each do |tag|
+      display_tags.push(tag.name)
+    end
+    # 配列を半角スペース区切りの文字列に変換し、データを引き渡す。
+    return display_tags.join(" ")
+  end
+
 end
