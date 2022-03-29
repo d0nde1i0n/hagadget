@@ -28,7 +28,13 @@ class GadgetsController < ApplicationController
   def index
     # order(order(#{sort_column} #{sort_direction}):カラム名、データの並べ替え手段をもとにデータを並び替える
     # page(params[:page]):ページネーションする際に必要な機能
-    @gadgets = Gadget.order("#{sort_column} #{sort_direction}").page(params[:page])
+    # 「includes」：親子関係をのデータリソースをまとめてDBから取得可能なメソッド（N+1問題対応）
+    # 「〇〇_attachment: :blob」：active_storageの"atachements"と"blob"のリレーションを利用してデータを取得
+    @gadgets = Gadget.includes(:tags,gadget_image_attachment: :blob,user: {profile_image_attachment: :blob}).
+                order("#{sort_column} #{sort_direction}").
+                page(params[:page])
+    # 【補足】userにprofile_iamgeを関連づけただけではエラーになる。（リレーションが下記のようになるため）
+    # 「アタッチ対象のtable 1-N active_storage_attachments 1-1 active_storage_blobs」
   end
 
   def show
