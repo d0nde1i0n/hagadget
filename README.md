@@ -42,7 +42,8 @@ https://drive.google.com/file/d/1Z5ll4Lik_xD-bUmnizcM2tw5xgNdFk2l/view?usp=shari
 https://docs.google.com/spreadsheets/d/13G_B8yLT-BSmLLW_tIPwHkceEOnp0CDXaKcEUOQhTVI/edit?usp=sharing
 - アプリケーション詳細設計書:
 https://docs.google.com/spreadsheets/d/1w2wvTOun5iro7W6lf0Zy87Nw_Ra85Y9IUveeTg8R_O0/edit?usp=sharing
-
+- テスト仕様書:
+https://docs.google.com/spreadsheets/d/14OcqpdKwubfn1E_wqoUdRSThiJcEpNRgbMIWcD67-2U/edit?usp=sharing
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1c27D3fFXtJfsvNfwr5SrzBJtwBF5zplWsIZUKu5p57k/edit?usp=sharing
@@ -54,7 +55,9 @@ https://docs.google.com/spreadsheets/d/1c27D3fFXtJfsvNfwr5SrzBJtwBF5zplWsIZUKu5p
 - JSライブラリ：jQuery,Bootstrap
 - IDE：Cloud9
 
-## 使用素材(予定)
+## 使用素材
 - Font FREE(https://fontfree.me/)
 - O-DAN(https://o-dan.net/ja/)
 - fontawesome(https://fontawesome.com/)
+- イラストAC(https://www.ac-illust.com/)
+- Google Fonts(https://fonts.google.com/)
