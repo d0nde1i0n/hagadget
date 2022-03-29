@@ -17,10 +17,10 @@ class UsersController < ApplicationController
     # occupation_idを取得
     @user.occupation_id = params[:user][:occupation_id]
     if @user.update(user_params)
-      flash[:notice] = "ユーザ情報を更新しました。"
+      flash.now[:notice] = "ユーザ情報を更新しました。"
       redirect_to user_path(@user)
     else
-      flash[:alert] = "ユーザ情報の更新に失敗しました。"
+      flash.now[:alert] = "ユーザ情報の更新に失敗しました。"
       render 'edit'
     end
   end
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     # before_actionで「@user」を取得
     # ログインユーザとユーザ詳細画面のユーザが一致しない場合は、ログインユーザのページに遷移
     unless @user == current_user
-      flash[:alert] = "不正な操作です。"
+      flash.now[:alert] = "不正な操作です。"
       redirect_to user_path(current_user)
     end
   end
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
   def ensure_guest_user
     # before_actionで「@user」を取得
     if @user.nickname == "guestuser"
-      flash[:alert] = 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+      flash.now[:alert] = 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
       redirect_to user_path(current_user)
     end
   end

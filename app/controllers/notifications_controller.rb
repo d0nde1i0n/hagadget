@@ -22,7 +22,7 @@ class NotificationsController < ApplicationController
       # ログインユーザとユーザ詳細画面のユーザが一致しない場合は、ログインユーザのページに遷移
       user = User.find(params[:user_id])
       unless user == current_user
-        flash[:alert] = "不正な操作です。"
+        flash.now[:alert] = "不正な操作です。"
         redirect_to user_path(current_user)
       end
     end

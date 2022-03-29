@@ -17,10 +17,10 @@ class GadgetsController < ApplicationController
     if @gadget.save
       # お気に入り登録に関連する通知レコードをデータベースに登録
       @gadget.save_tag(@tag_list)
-      flash[:notice] = "ガジェット記事を投稿しました。"
+      flash.now[:notice] = "ガジェット記事を投稿しました。"
       redirect_to gadget_path(@gadget)
     else
-      flash[:alert] = "ガジェット記事の投稿ができませんでした。"
+      flash.now[:alert] = "ガジェット記事の投稿ができませんでした。"
       render new_gadget_path
     end
   end
@@ -39,7 +39,8 @@ class GadgetsController < ApplicationController
 
   def show
     # before_action :set_gadget_infoで「@gadget」を取得
-    @gadget_comments = @gadget.gadget_comments.all
+    # N+1問題への対応
+    @gadget_comments = @gadget.gadget_comments.includes(user: {profile_image_attachment: :blob})
     @gadget_comment = GadgetComment.new
   end
 
@@ -53,10 +54,10 @@ class GadgetsController < ApplicationController
     if @gadget.update(gadget_params)
       # タグ情報の更新処理
       @gadget.save_tag(@tag_list)
-      flash[:notice] = "対象の投稿記事情報を更新しました。"
+      flash.now[:notice] = "対象の投稿記事情報を更新しました。"
       redirect_to gadget_path(@gadget)
     else
-      flash[:alert] = "対象の投稿記事情報を更新できませんでした。"
+      flash.now[:alert] = "対象の投稿記事情報を更新できませんでした。"
       render "edit"
     end
   end
@@ -64,7 +65,7 @@ class GadgetsController < ApplicationController
   def destroy
     # before_action :set_gadget_infoで「@gadget」を取得
     @gadget.destroy
-    flash[:notice] = "対象の投稿記事を削除しました。"
+    flash.now[:notice] = "対象の投稿記事を削除しました。"
     redirect_to user_path(@gadget.user)
   end
 
@@ -83,7 +84,7 @@ class GadgetsController < ApplicationController
     # before_actionで「@user」を取得
     # ログインユーザとユーザ詳細画面のユーザが一致しない場合は、ログインユーザのページに遷移
     unless @gadget.user == current_user
-      flash[:alert] = "不正な操作です。"
+      flash.now[:alert] = "不正な操作です。"
       redirect_to user_path(current_user)
     end
   end
