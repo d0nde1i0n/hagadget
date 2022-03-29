@@ -1,8 +1,15 @@
+<!--トップ画面-->
 <div class="container">
-  <div class="row">
-    <div class="mx-auto mt-3">
+
+  <div class="row d-flex justify-content-center">
+    <div class="mt-3">
       <%= link_to "ガジェットを探しに行く！！",gadgets_path,class:"btn btn-info" %>
     </div>
+    <% unless user_signed_in? %>
+      <div class="mt-3 ml-3">
+        <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-block sign_in", method: :post %>
+      </div>
+    <% end %>
   </div>
 
   <div class="row">
