@@ -25,12 +25,18 @@
         <div>
           <h3><%= render 'users/occupation_btn',user: @user %></h3>
         </div>
+        <!--フォロー/フォロー解除ボタン、ユーザ情報編集ボタン-->
         <div>
-          <% if @user == current_user %><!--投稿ユーザ＝ログインユーザの場合-->
-            <!--ユーザ情報編集ボタン-->
-            <%= link_to "ユーザ情報編集",edit_user_path(@user),class: "btn btn-success" %>
+          <% unless @user.nickname == 'guestuser' %>
+            <% if @user == current_user %>
+              <!--ユーザ情報編集ボタン-->
+              <%= link_to "ユーザ情報編集",edit_user_path(@user),class: "btn btn-success" %>
+            <% else %>
+              <!--フォロー/フォロー解除ボタン-->
+              <%= render "relationships/follow_btn",user: @user %>
+            <% end %>
           <% else %>
-            <%= render "relationships/follow_btn",user: @user %>
+            <!--ゲストユーザの場合は何も表示しない-->
           <% end %>
         </div>
       </div>
@@ -69,7 +75,7 @@
         <p>ユーザ紹介文が登録されていません</p>
       <% end %>
     </div>
-    
+
   </div>
 
   <!--ユーザの投稿一覧-->

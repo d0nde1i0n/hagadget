@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!,except: [:show,:followers,:followings]
-  before_action :set_user_info,only:[:show,:edit,:update,:followers,:followings,:ensure_correct_user]
+  before_action :set_user_info,only:[:show,:edit,:update,:followers,:followings,:ensure_correct_user,:ensure_guest_user]
   before_action :ensure_correct_user,only: [:edit,:update]
-
+  before_action :ensure_guest_user,only: [:edit]
 
   def show
     # before_action :set_user_infoで「@user」を取得
@@ -54,6 +54,14 @@ class UsersController < ApplicationController
     # ログインユーザとユーザ詳細画面のユーザが一致しない場合は、ログインユーザのページに遷移
     unless @user == current_user
       flash[:alert] = "不正な操作です。"
+      redirect_to user_path(current_user)
+    end
+  end
+
+  def ensure_guest_user
+    # before_actionで「@user」を取得
+    if @user.nickname == "guestuser"
+      flash[:alert] = 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
       redirect_to user_path(current_user)
     end
   end

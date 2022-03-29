@@ -67,4 +67,16 @@ class User < ApplicationRecord
     end
   end
 
+  # ゲストユーザログイン時にユーザ情報を作成するメソッド
+  def self.guest
+    find_or_create_by!(nickname: 'guestuser' ,email: 'guest@example.com') do |user|
+      # バリデーションに引っかかるカラムに値をセット
+      user.password = SecureRandom.urlsafe_base64
+      user.last_name = "guest"
+      user.first_name = "user"
+      user.nickname = "guestuser"
+      user.occupation_id = 1
+    end
+  end
+
 end

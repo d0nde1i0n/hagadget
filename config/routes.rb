@@ -5,7 +5,12 @@ Rails.application.routes.draw do
     # sessionsコントローラをオーバーライドしたいため、設定ファイルが記載されたパスを指定
     sessions: 'customized/sessions'
   }
-  
+
+  # ゲストユーザ関連のルーティング
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+
   # トップページへのルーティング
   root :to => 'homes#top'
   # 検索結果ページのルーティング
