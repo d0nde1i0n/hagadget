@@ -4,7 +4,8 @@ class NotificationsController < ApplicationController
 
   def index
     # インスタンス変数にカレントユーザに紐づく受信通知テーブルの情報を格納
-    @notifications = current_user.passive_notifications
+    # N+1問題への対応
+    @notifications = current_user.passive_notifications.includes(:visited,:visitor,:gadget,:gadget_comment)
 
     # 表示した全ての通知を確認済みにする
     @notifications.where(checked: false).each do |notification|
@@ -21,7 +22,7 @@ class NotificationsController < ApplicationController
       # ログインユーザとユーザ詳細画面のユーザが一致しない場合は、ログインユーザのページに遷移
       user = User.find(params[:user_id])
       unless user == current_user
-        flash[:alert] = "不正な操作です。"
+        flash.now[:alert] = "不正な操作です。"
         redirect_to user_path(current_user)
       end
     end
