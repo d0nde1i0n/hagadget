@@ -4,7 +4,8 @@ class NotificationsController < ApplicationController
 
   def index
     # インスタンス変数にカレントユーザに紐づく受信通知テーブルの情報を格納
-    @notifications = current_user.passive_notifications
+    # N+1問題への対応
+    @notifications = current_user.passive_notifications.includes(:visited,:visitor,:gadget,:gadget_comment)
 
     # 表示した全ての通知を確認済みにする
     @notifications.where(checked: false).each do |notification|
