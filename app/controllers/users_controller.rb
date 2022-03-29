@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
     # before_action :set_user_infoで「@user」を取得
-    @gadgets = @user.gadgets.order(created_at: :DESC).page(params[:page])
+    @gadgets = @user.gadgets.includes(:tags,gadget_image_attachment: :blob).order(created_at: :DESC).page(params[:page])
   end
 
   def edit
