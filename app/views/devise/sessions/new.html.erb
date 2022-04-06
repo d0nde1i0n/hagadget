@@ -1,39 +1,42 @@
-<div class="container">
-  <div class="row d-flex mt-5">
-    <h2>ログイン</h2>
-      <div class="ml-auto h4">
-        <span>まだ登録がお済みでない方：</span>
+<div class="container-fuluid">
+
+  <div class="row mx-0 my-2">
+    <div class="col-md-2 offset-md-2">
+      <span class="page_title h2">ログイン</span>
+    </div>
+    <div class="col-md-4 offset-md-2 mt-2 h5">
+      <span>まだ登録がお済みでない方：</span>
           <%= link_to 'こちら',new_user_registration_path %>
-        <span>をクリック</span>
-      </div>
+      <span>をクリック</span>
+    </div>
   </div>
 
   <!--ログイン時の入力項目-->
   <%= form_with model: @user,url: user_session_path,local: true do |f| %>
 
     <!--メールアドレス-->
-    <div class ="form-group row ml-2 mt-3">
-      <div class="form-title col-3 ml-2 mt-3">
-        <%= f.label :email,"メールアドレス",class: "h4"%>
+    <div class="form-group row mx-0 mt-1">
+      <div class="col-md-2 offset-md-3 col-form-label">
+        <%= f.label :email,"メールアドレス:",class: "h5"%>
       </div>
-      <div class="form-field col-8 ml-2 mt-3">
-          <%= f.email_field :email,placeholder: "xxx@yyy.zzz", autofocus: true, autocomplete: "email" %>
+      <div class="col-md-2">
+        <%= f.email_field :email,placeholder: "xxx@yyy.zzz", autofocus: true, autocomplete: "email",class: "form-control"%>
       </div>
     </div>
 
     <!--パスワード-->
-    <div class ="form-group row ml-2 mt-3">
-      <div class="form-title col-3 ml-2 mt-3">
-        <%= f.label :password,"パスワード",class: "h4"%>
+    <div class ="form-group row mx-0 mt-1">
+      <div class="col-md-2 offset-md-3 col-form-label">
+        <%= f.label :password,"パスワード:",class: "h5"%>
       </div>
-      <div class="form-field col-8 ml-2 mt-3">
-          <%= f.password_field :password, autocomplete: "current-password" %>
+      <div class="col-md-3">
+        <%= f.password_field :password, autocomplete: "current-password",class: "form-control" %>
       </div>
     </div>
 
     <!--ログイン情報の保持-->
-    <div class ="form-group row ml-2 mt-3">
-      <div class="form-title col-3 ml-2 mt-3">
+    <div class ="form-group row mx-0 mt-1">
+      <div class="col-md-2 offset-md-3 col-form-label">
         <% if devise_mapping.rememberable? %>
             <%= f.check_box :remember_me %>
             <%= f.label :remember_me,"ログイン情報を保持する" %>
@@ -41,9 +44,8 @@
       </div>
     </div>
 
-
-    <div class="actions mt-3 text-center">
-      <%= f.submit "ログインする",class:"btn btn-success" %>
+    <div class="col-md-2 offset-md-5 mb-2">
+      <%= f.submit "ログインする",class:"btn btn-block btn-success" %>
     </div>
 <% end %>
 

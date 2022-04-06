@@ -8,7 +8,7 @@
   </div>
 
   <!--通知一覧表示-->
-  <table class="table table table-hover table-sm mt-3">
+  <table class="table  table-hover table-sm mt-3">
     <% @notifications.each do |notification| %>
       <%= render "notifications/#{Notification.action_types.key(notification.action)}",notification: notification %>
       <!--Notification.action_types.key(notification.action)部分について-->
