@@ -1,54 +1,43 @@
 <!--ガジェット一覧：【部分テンプレート】-->
-  <table class="table table-hover table-sm">
-    <thead class="thead-dark">
-      <tr class="text-center align-middle">
-        <th style="width: 15%">投稿日</th>
-        <th style="width: 20%">投稿ユーザ名</th>
-        <th style="width: 20%">投稿ガジェット名</th>
-        <th style="width: 20%">タグ</th>
-        <th style="width: 15%">投稿ユーザの評価</th>
-        <th style="width: 10%">お気に入り数</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% gadgets.each do |gadget| %>
-      <tr class="text-center align-middle">
-        <td>
-          <!--投稿日-->
-          <%= gadget.date_conversion(gadget.created_at) %>
-        </td>
-        <td>
-          <!--投稿ユーザ名-->
-          <%= link_to user_path(gadget.user) do %>
-            <%= image_tag gadget.user.get_profile_image, size: "50x50",class: "rounded-circle border border-info"%>
-            <%= gadget.user.nickname %>
-          <% end %>
-
-        </td>
-        <td>
-          <!--投稿ガジェット名-->
-          <%= link_to gadget_path(gadget) do %>
-            <%= image_tag gadget.get_gadget_image, size: "50x50",class: "border border-info"%>
+<div class="row">
+  <% gadgets.each do |gadget| %>
+    <div class="col-md-3 col-md-offset-2 mb-3">
+      <div class="bg-white rounded shadow">
+        <div class="thumbnail">
+          <!--投稿ガジェット画像-->
+          <%= image_tag gadget.get_gadget_image,class: "w-100 rounded gadget-thumbnail"%>
+          <!--お気に入り登録ボタン-->
+          <div class="favorite_btn-bg h5">
+            <%= render 'favorites/favorite_btn',gadget: gadget %>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <!--投稿ガジェット名-->
             <%= gadget.name %>
-          <% end %>
-        </td>
-        <td>
-          <!--タグ-->
-          <!--タグボタンのテンプレート-->
-          <%= render 'gadgets/tag_btns',gadget: gadget %>
-        </td>
-        <td>
-          <!--評価機能（表示のみ）の部分テンプレート-->
+          </h5>
+
           <%= render 'gadgets/read_only_score',gadget: gadget %>
-        </td>
-        <td>
-          <!--お気に入り機能の部分テンプレート-->
-          <%= render 'favorites/favorite_btn',gadget: gadget %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div>
+          <div class="card-text">
+            <%= render 'gadgets/tag_btns',gadget: gadget %>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <!--投稿ユーザ画像・投稿ユーザ名-->
+          <%= link_to user_path(gadget.user) do %>
+            <%= image_tag gadget.user.get_profile_image, size: "40x40",class: "rounded-circle"%>
+            <small><%= gadget.user.nickname %></small>
+          <% end %>
+          <!--投稿日-->
+          <small class="text-muted text-align-center">
+            <%= gadget.date_conversion(gadget.created_at) %>
+          </small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div>
     <%= paginate gadgets,class: "bg-reset"%>
-  </div>
+</div>

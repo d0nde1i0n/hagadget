@@ -96,3 +96,25 @@ ul {
 .pagination{
   justify-content: center;
 }
+
+.thumbnail {/*親div*/
+  position: relative;/*相対配置*/
+  }
+
+.favorite_btn-bg {
+  width: 50px;
+  height: 50px;
+  color: #000000;
+  background-color: #fff8dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border-style: solid;
+  border-radius: 50%;
+  cursor: pointer;
+
+  position: absolute;
+  top: 70%;
+  left: 75%;
+  }
