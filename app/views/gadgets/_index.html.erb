@@ -5,7 +5,9 @@
       <div class="bg-white rounded shadow">
         <div class="thumbnail">
           <!--投稿ガジェット画像-->
-          <%= image_tag gadget.get_gadget_image,class: "w-100 rounded gadget-thumbnail"%>
+          <%= link_to gadget_path(gadget) do %>
+            <%= image_tag gadget.get_gadget_image,class: "w-100 rounded gadget-thumbnail"%>
+          <% end %>
           <!--お気に入り登録ボタン-->
           <div class="favorite_btn-bg h5">
             <%= render 'favorites/favorite_btn',gadget: gadget %>
@@ -14,30 +16,38 @@
         <div class="card-body">
           <h5 class="card-title">
             <!--投稿ガジェット名-->
-            <%= gadget.name %>
+            <%= link_to gadget_path(gadget) do %>
+              <%= gadget.name %>
+            <% end %>
           </h5>
-
-          <%= render 'gadgets/read_only_score',gadget: gadget %>
-          <div class="card-text">
+          <div class="card-tags">
+            <!--投稿ガジェットに紐づくタグボタン-->
             <%= render 'gadgets/tag_btns',gadget: gadget %>
           </div>
+
+          <div class="card-score text-right my-1">
+            <!--投稿ガジェットの評価-->
+            <%= render 'gadgets/read_only_score',gadget: gadget %>
+          </div>
+
+          <div class="card-created_at text-muted text-right ">
+            <%= gadget.date_conversion(gadget.created_at) %>
+          </div>
+
         </div>
-        <div class="card-footer d-flex justify-content-between">
+        <div class="card-footer">
           <!--投稿ユーザ画像・投稿ユーザ名-->
           <%= link_to user_path(gadget.user) do %>
             <%= image_tag gadget.user.get_profile_image, size: "40x40",class: "rounded-circle"%>
             <small><%= gadget.user.nickname %></small>
           <% end %>
-          <!--投稿日-->
-          <small class="text-muted text-align-center">
-            <%= gadget.date_conversion(gadget.created_at) %>
-          </small>
         </div>
       </div>
     </div>
   <% end %>
 </div>
 
+<!--ページネーション-->
 <div>
     <%= paginate gadgets,class: "bg-reset"%>
 </div>

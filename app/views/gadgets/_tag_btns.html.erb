@@ -4,6 +4,6 @@
   <!--投稿記事に紐づくタグの数だけ処理を繰り返す-->
   <% gadget.tags.each do |tag| %>
     <!--タグ名を表示する-->
-    <%= link_to "#{tag.name}",search_path(content: tag.name,model: 'tag'),class: "btn btn-outline-info btn-sm" %>
+    <%= link_to "#{tag.name}",search_path(content: tag.name,model: 'tag'),class: "btn btn-outline-info btn-sm mx-1 my-1" %>
   <% end %>
 <% end %>
