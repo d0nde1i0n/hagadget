@@ -1,149 +1,153 @@
+<!--ガジェット記事画面-->
 <div class="container">
-
+  <!--ページタイトル-->
   <div class="site-title mt-3">
     <h2><span class="page_title">ガジェット記事</span></h2>
   </div>
 
-  <div class="row mt-3">
-    <!--投稿されたガジェット画像-->
-    <div class="col-3">
-      <%= image_tag @gadget.get_gadget_image,class: "w-100" %>
+  <div class="bg-white rounded shadow-lg mt-3 py-2">
+    <div class="row mx-0 mt-3">
+      <!--投稿されたガジェット画像-->
+      <div class="thumbnail col-12 col-md-3">
+        <%= image_tag @gadget.get_gadget_image,class: "w-100" %>
+        <!--お気に入りボタン-->
+        <div class="favorite_btn-bg h5">
+            <%= render 'favorites/favorite_btn',gadget: @gadget %>
+        </div>
+      </div>
+
+      <!--投稿ガジェットに紐づく情報-->
+      <div class="col-md-6 h5">
+
+        <!--ガジェット名-->
+        <div class="row mb-2">
+          <div class="col-12 col-md-4">ガジェット名</div>
+          <div class="col-12 col-md-8"><%= @gadget.name %></div>
+        </div>
+
+        <!--メーカー名-->
+        <div class="row mb-2">
+          <div class="col-12 col-md-4">メーカー名</div>
+          <div class="col-12 col-md-8"><%= @gadget.manufacture_name %></div>
+        </div>
+
+         <!--タグ-->
+        <div class="row mb-2">
+          <div class="col-12 col-md-4">タグ</div>
+          <div class="col-12 col-md-8">
+            <!--タグボタンのテンプレート-->
+            <%= render 'gadgets/tag_btns',gadget: @gadget %>
+          </div>
+        </div>
+
+         <!--参考価格-->
+        <div class="row mb-2">
+          <div class="col-12 col-md-4">参考価格</div>
+          <div class="col-12 col-md-8">
+            <!--number_to_currency:数値を通過のフォーマットに変換するメソッド-->
+            <!--format => "%n%u":「数値＋単位」の順番に表示されるように指定-->
+            <!--precision：小数点以下の表示桁数-->
+            <%= number_to_currency(@gadget.price,:format => "%n%u",:unit => "円",:precision => 0) %>
+          </div>
+        </div>
+
+        <!--投稿ユーザの評価-->
+        <div class="row mb-2">
+          <div class="col-12 col-md-4">投稿ユーザの評価</div>
+          <div class="col-12 col-md-8">
+             <!--投稿ユーザの評価(表示のみ)-->
+            <div id="score-output<%= @gadget.id%>"></div>
+            <!--評価表示用スクリプト-->
+            <script>
+              // 「.on(turbolinks:load)」：イベント「turbolinks:load」実行後の処理
+              $(document).on('turbolinks:load',function(){
+                // id=starの子要素を全て削除し、空にする。
+                $('#score-output<%= @gadget.id%>').empty();
+                // ratyの表示仕様
+                $('#score-output<%= @gadget.id%>').raty({
+                  size     : 36,
+                  starOff  : '<%= asset_path('star-off.png') %>',
+                  starOn : '<%= asset_path('star-on.png') %>',
+                  starHalf: '<%= asset_path('star-half.png') %>',
+                  scoreName: 'gadget[score]',
+                  half: true,
+                  readOnly: true,
+                  score: <%= @gadget.score %>,
+                });
+              })
+            </script>
+          </div>
+        </div>
+
+        <!--投稿ユーザ名-->
+        <div class="row mb-2">
+          <div class="col-12 col-md-4">投稿ユーザ名</div>
+          <div class="col-12 col-md-8">
+            <%= link_to user_path(@gadget.user)  do %>
+              <%= @gadget.user.nickname %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!--お気に入り数、各種ボタンの表示-->
+      <div class="col-12 col-md-3">
+        <div class="text-center h4">お気に入りされた数</div>
+          <div  class="mt-4 text-center h2">
+            <%= render 'favorites/favorite_btn',gadget: @gadget%>
+          </div>
+        <!--投稿ユーザ＝ログインユーザの場合-->
+        <% if @gadget.user == current_user %>
+          <div class="d-flex justify-content-around mt-5">
+            <!--編集ボタン-->
+            <%= link_to "編集",edit_gadget_path(@gadget),class: "btn btn-success w-50 mr-2"%>
+            <!---削除ボタン-->
+            <%= link_to "削除",@gadjet,class: "btn btn-danger w-50",method: :delete,local: true,
+              data: { confirm: '本当に投稿記事を削除しますか？'} %>
+          </div>
+        <% end %>
+      </div>
     </div>
 
-    <!--投稿ガジェットに紐づく情報-->
-    <div class="col-6 h5">
-
-      <!--ガジェット名-->
-      <div class="row mb-2">
-        <div class="col-4">ガジェット名</div>
-        <div class="col-8"><%= @gadget.name %></div>
-      </div>
-
-      <!--メーカー名-->
-      <div class="row mb-2">
-        <div class="col-4">メーカー名</div>
-        <div class="col-8"><%= @gadget.manufacture_name %></div>
-      </div>
-
-       <!--タグ-->
-      <div class="row mb-2">
-        <div class="col-4">タグ</div>
-        <div class="col-8">
-          <!--タグボタンのテンプレート-->
-          <%= render 'gadgets/tag_btns',gadget: @gadget %>
+    <div class="mx-auto mt-3 w-100">
+      <h3>ガジェットの使用感等</h3>
+      <% unless @gadget.description.blank? %>
+        <div>
+          <!--受領したデータを配列化し、要素ごとに改行して表示する-->
+          <%= safe_join(@gadget.description.split("\n"),tag(:br)) %>
         </div>
-      </div>
-
-       <!--参考価格-->
-      <div class="row mb-2">
-        <div class="col-4">参考価格</div>
-        <div class="col-8">
-          <!--number_to_currency:数値を通過のフォーマットに変換するメソッド-->
-          <!--format => "%n%u":「数値＋単位」の順番に表示されるように指定-->
-          <!--precision：小数点以下の表示桁数-->
-          <%= number_to_currency(@gadget.price,:format => "%n%u",:unit => "円",:precision => 0) %>
-        </div>
-      </div>
-
-      <!--投稿ユーザの評価-->
-      <div class="row mb-2">
-        <div class="col-4">投稿ユーザの評価</div>
-        <div class="col-8">
-           <!--投稿ユーザの評価(表示のみ)-->
-          <div id="score-output<%= @gadget.id%>"></div>
-          <!--評価表示用スクリプト-->
-          <script>
-            // 「.on(turbolinks:load)」：イベント「turbolinks:load」実行後の処理
-            $(document).on('turbolinks:load',function(){
-              // id=starの子要素を全て削除し、空にする。
-              $('#score-output<%= @gadget.id%>').empty();
-              // ratyの表示仕様
-              $('#score-output<%= @gadget.id%>').raty({
-                size     : 36,
-                starOff  : '<%= asset_path('star-off.png') %>',
-                starOn : '<%= asset_path('star-on.png') %>',
-                starHalf: '<%= asset_path('star-half.png') %>',
-                scoreName: 'gadget[score]',
-                half: true,
-                readOnly: true,
-                score: <%= @gadget.score %>,
-              });
-            })
-          </script>
-        </div>
-      </div>
-
-      <!--投稿ユーザ名-->
-      <div class="row mb-2">
-        <div class="col-4">投稿ユーザ名</div>
-        <div class="col-8">
-          <%= link_to user_path(@gadget.user)  do %>
-            <%= @gadget.user.nickname %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <!--お気に入り数、各種ボタンの表示-->
-    <div class="col-3">
-      <div class="text-center h4">お気に入りされた数</div>
-        <div  class="mt-4 text-center h2">
-          <%= render 'favorites/favorite_btn',gadget: @gadget%>
-        </div>
-      <!--投稿ユーザ＝ログインユーザの場合-->
-      <% if @gadget.user == current_user %>
-        <div class="d-flex justify-content-around mt-5">
-          <!--編集ボタン-->
-          <%= link_to "編集",edit_gadget_path(@gadget),class: "btn btn-success w-50 mr-2"%>
-          <!---削除ボタン-->
-          <%= link_to "削除",@gadjet,class: "btn btn-danger w-50",method: :delete,local: true,
-            data: { confirm: '本当に投稿記事を削除しますか？'} %>
-        </div>
+      <% else %>
+        <p>ユーザ紹介文が登録されていません</p>
       <% end %>
     </div>
   </div>
 
-  <div class="mx-auto mt-3 w-100">
-    <h3>ガジェットの使用感等</h3>
-    <% unless @gadget.description.blank? %>
-      <div>
-        <!--受領したデータを配列化し、要素ごとに改行して表示する-->
-        <%= safe_join(@gadget.description.split("\n"),tag(:br)) %>
-      </div>
-    <% else %>
-      <p>ユーザ紹介文が登録されていません</p>
-    <% end %>
+  <!--エラーメッセージ表示エリアの部分テンプレート-->
+  <div id="gadget_comment_error" class="mt-3">
+    <%= render 'layouts/error_message',model: @gadget_comment %>
   </div>
 
-    <!--エラーメッセージ表示エリアの部分テンプレート-->
-    <div id="gadget_comment_error" class="mt-3">
-      <%= render 'layouts/error_message',model: @gadget_comment %>
+  <!--コメント一覧-->
+  <div class="row mx-0 mt-2">
+    <div class="h4">
+      <span>コメント一覧:</span>
+      <span id="gadget-comment-count"><%= @gadget_comments.count %></span>
+      <span>件</span>
     </div>
+    <%= render 'gadget_comments/index',gadget_comments: @gadget_comments %>
+  </div>
 
-
-    <!--コメント一覧-->
-    <div class="row">
-      <div class="h4">
-        <span>コメント一覧:</span>
-        <span id="gadget-comment-count"><%= @gadget_comments.count %></span>
-        <span>件</span>
+  <!--コメント投稿-->
+  <% unless current_user.nil? %>
+    <%= form_with model: [@gadget,@gadget_comment],remote: true do |f| %>
+      <div class="text-center">
+        <%= f.text_area :comment,class: "form-control"%>
       </div>
-      <%= render 'gadget_comments/index',gadget_comments: @gadget_comments %>
-    </div>
-
-
-
-    <!--コメント投稿-->
-    <% unless current_user.nil? %>
-      <%= form_with model: [@gadget,@gadget_comment],remote: true do |f| %>
-        <div class="text-center">
-          <%= f.text_area :comment,class: "w-50"%>
-        </div>
-        <div class="text-center">
-          <%= f.submit "コメント投稿",class: "btn btn-success" %>
-        </div>
-      <% end %>
+      <div class="my-3 text-center">
+        <%= f.submit "コメント投稿",class: "btn btn-success" %>
+      </div>
     <% end %>
+  <% end %>
 </div>
 
 

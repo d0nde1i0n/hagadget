@@ -1,14 +1,15 @@
- <div class="container-fluid">
-
-  <div class="d-flex justify-content-between mt-3">
-    <div class="h2">
+ <!--フォロワーユーザ一覧画面-->
+ <div class="container">
+  <div class="row mx-0">
+    <div class="col-md-7 h2">
       <span class="page_title"><%= @user.nickname%>さんのフォロワー</span>
     </div>
-    <%= link_to user_path(@user),class: "h5" do %>
+    <div class="col-md-5 mt-2 h5">
+      <%= link_to user_path(@user) do %>
       <%= @user.nickname %>さんのマイページに戻る
     <% end %>
+    </div>
   </div>
-
   <!--ユーザ一覧の部分テンプレート-->
   <%= render 'users/index',users: @users %>
  </div>

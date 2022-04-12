@@ -28,14 +28,14 @@ class UsersController < ApplicationController
   def followers
     # before_action :set_user_infoで「@user」を取得
     # 「@userに紐づくユーザをフォローしているユーザ達(fllowers)」＝「@userに紐づくユーザのフォロワー」
-    @users = @user.followers.includes(:occupation,profile_image_attachment: :blob).page(params[:page])
+    @users = @user.followers.includes(profile_image_attachment: :blob).page(params[:page])
   end
 
   def followings
     # before_action :set_user_infoで「@user」を取得
     # 「@userに紐づくユーザにフォローされているユーザ達(fllowings)」
     #   ＝「@userに紐づくユーザがフォロー中」
-    @users = @user.followings.includes(:occupation,profile_image_attachment: :blob).page(params[:page])
+    @users = @user.followings.includes(profile_image_attachment: :blob).page(params[:page])
   end
 
 

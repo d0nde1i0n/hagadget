@@ -3,21 +3,18 @@
     <% gadget_comments.each do |gadget_comment| %>
     <tbody>
       <tr>
-        <td style="width: 15%">
-          <%= gadget_comment.gadget.date_conversion(gadget_comment.created_at) %>
-        </td>
-        <td style="width: 25%">
-          <%= link_to user_path(gadget_comment.user) do %>
-            <%= image_tag gadget_comment.user.get_profile_image,size: "50x50",
-              class: "rounded-circle border border-3 border-info" %>
-            <%= gadget_comment.user.nickname %>
-          <% end %>
-        </td>
-        <td style="width: 45%">
+        <th class="bg-light">
+            <%= link_to user_path(gadget_comment.user) do %>
+              <%= image_tag gadget_comment.user.get_profile_image,size: "30x30",
+                class: "rounded-circle border border-3 border-info" %>
+              <%= gadget_comment.user.nickname %>
+            <% end %>
+        </th>
+      </tr>
+      <tr class="bg-white">
+        <td>
+          <!--ガジェットに対するコメント-->
           <%= gadget_comment.comment %>
-        </td>
-
-        <td style="width: 15%">
           <!--ゲストはガジェット記事詳細を閲覧可能だが、ユーザ情報を持っていないため判断条件を追加-->
           <% if gadget_comment.user == current_user && current_user != nil%>
             <%= link_to "コメント削除",gadget_gadget_comment_path(gadget_comment.gadget,gadget_comment),
@@ -27,7 +24,7 @@
         </td>
       </tr>
     </tbody>
-     <% end %>
+    <% end %>
   </table>
 
 

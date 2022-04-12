@@ -1,86 +1,86 @@
 <!--ユーザ情報画面-->
 <div class="container">
-
+  <!--ページタイトル-->
   <div class="site-title mt-3">
     <h2><span class="page_title">ユーザ情報</span></h2>
   </div>
 
-  <div class="row mt-3">
-
-    <!--プロフィール画像-->
-    <div class="col-2">
-      <div class="profile-image">
-        <%= image_tag @user.get_profile_image, size:"150x150",class: "rounded-circle border border-info" %>
+  <div class="bg-white rounded shadow-lg mt-3 py-2">
+    <div class="row mx-0 mt-3">
+      <!--プロフィール画像-->
+      <div class="col-12 col-md-2 text-center">
+        <div class="profile-image">
+          <%= image_tag @user.get_profile_image, size:"150x150",class: "rounded-circle border border-info" %>
+        </div>
       </div>
-    </div>
 
-    <div class="col-10">
-
-      <div class="d-flex justify-content-between mt-1 ml-3">
-        <!--ユーザ名-->
-        <div>
-          <h3><%= @user.nickname%></h3>
-        </div>
-        <!--職種-->
-        <div>
-          <h3><%= render 'users/occupation_btn',user: @user %></h3>
-        </div>
-        <!--フォロー/フォロー解除ボタン、ユーザ情報編集ボタン-->
-        <div>
-          <% unless @user.nickname == 'guestuser' %>
-            <% if @user == current_user %>
-              <!--ユーザ情報編集ボタン-->
-              <%= link_to "ユーザ情報編集",edit_user_path(@user),class: "btn btn-success" %>
+      <div class="col-12 col-md-10 text-center">
+        <!--ユーザ情報詳細-->
+        <div class="row">
+          <!--ユーザ名-->
+          <div class="col-12 col-md-4">
+            <h3><%= @user.nickname%></h3>
+          </div>
+          <!--職種-->
+          <div class="col-6 col-md-4">
+            <h3><%= render 'users/occupation_btn',user: @user %></h3>
+          </div>
+          <!--「フォロー/フォロー解除ボタン」 OR 「ユーザ情報編集ボタン」-->
+          <div class="col-6 col-md-4">
+            <% unless @user.nickname == 'guestuser' %>
+              <% if @user == current_user %>
+                <!--ユーザ情報編集ボタン-->
+                <%= link_to "ユーザ情報編集",edit_user_path(@user),class: "btn btn-success" %>
+              <% else %>
+                <!--フォロー/フォロー解除ボタン-->
+                <%= render "relationships/follow_btn",user: @user %>
+              <% end %>
             <% else %>
-              <!--フォロー/フォロー解除ボタン-->
-              <%= render "relationships/follow_btn",user: @user %>
+              <!--ゲストユーザの場合は何も表示しない-->
             <% end %>
-          <% else %>
-            <!--ゲストユーザの場合は何も表示しない-->
-          <% end %>
+          </div>
         </div>
-      </div>
-
-      <div class="d-flex justify-content-between mt-3 ml-3">
-        <div class="text-center">
-          <!--ガジェット投稿機能実装後に修正する必要あり-->
-          <h4>投稿ガジェット数</h4>
-          <h3><%= @user.gadgets.count %></h3>
-        </div>
-        <div class="text-center">
-          <h4>フォロー数</h4>
-          <%= link_to followings_user_path(@user),class: "h3" do %>
-            <%= @user.followings.count %>
-          <% end %>
-        </div>
-        <div class="text-center">
-          <!--フォロー機能実装後に修正する必要あり-->
-          <h4>フォロワー数</h4>
-          <%= link_to followers_user_path(@user),class: "h3" do %>
-            <!--フォロワー数の部分テンプレート-->
-            <%= render 'users/number_of_followers',user: @user %>
-          <% end %>
+        <!--フォロー/フォロワー数-->
+        <div class="row mt-3">
+          <div class="col-6 col-md-6">
+            <h4>フォロー数</h4>
+            <%= link_to followings_user_path(@user),class: "h3" do %>
+              <%= @user.followings.count %>
+            <% end %>
+          </div>
+          <div class="col-6 col-md-6">
+            <!--フォロー機能実装後に修正する必要あり-->
+            <h4>フォロワー数</h4>
+            <%= link_to followers_user_path(@user),class: "h3" do %>
+              <!--フォロワー数の部分テンプレート-->
+              <%= render 'users/number_of_followers',user: @user %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="mx-auto mt-3 w-100">
-      <h3>ユーザ紹介文</h3>
-      <% unless @user.introduction.blank? %>
-        <div>
-          <!--受領したデータを配列化し、要素ごとに改行して表示する-->
-          <%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
-        </div>
-      <% else %>
-        <p>ユーザ紹介文が登録されていません</p>
-      <% end %>
+    <!--ユーザ紹介文-->
+    <div class="row mx-0 mt-3">
+      <div class="col-12">
+         <h3>ユーザ紹介文</h3>
+      </div>
+      <div class="col-12">
+         <% unless @user.introduction.blank? %>
+          <div>
+            <!--受領したデータを配列化し、要素ごとに改行して表示する-->
+            <%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
+          </div>
+        <% else %>
+          <p>ユーザ紹介文が登録されていません</p>
+        <% end %>
+      </div>
     </div>
-
   </div>
 
   <!--ユーザの投稿一覧-->
   <div class="row mt-5"></div>
-  <h3><%= @user.nickname%>さんの投稿ガジェット一覧</h3>
+  <h3><%= @user.nickname%>さんの投稿ガジェット一覧(<%= @user.gadgets.count %>件)</h3>
 
   <!--ガジェット一覧テーブルの部分テンプレート-->
   <%= render 'gadgets/index',gadgets: @gadgets %>

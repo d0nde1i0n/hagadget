@@ -96,3 +96,25 @@ ul {
 .pagination{
   justify-content: center;
 }
+
+// ガジェット画像上でのお気に入り登録ボタンの表示
+.thumbnail {/*親div*/
+  position: relative;/*相対配置*/
+  }
+.favorite_btn-bg {
+  width: 50px;
+  height: 50px;
+  color: #f0f8ff;
+  background-color: #fff8dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  border-style: solid;
+  border-radius: 50%;
+  cursor: pointer;
+
+  position: absolute;
+  top: 5%;
+  left: 75%;
+  }
