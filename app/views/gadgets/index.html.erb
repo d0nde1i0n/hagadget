@@ -5,13 +5,13 @@
   </div>
 
   <!--投稿日の昇順/降順切替え-->
-  <div class="row mr-auto d-flex justify-content-end">
-    <div class="my-1">
+  <div class="row mx-0">
+    <div class="col-md-2 offset-md-7 my-1 text-right">
       <span class="font-weight-bold">投稿日: </span>
       <%= sort_asc("create_at") %>
       <%= sort_desc("create_at") %>
     </div>
-    <div class="my-1">
+    <div class="col-md-3 my-1 text-right">
       <span class="font-weight-bold">　投稿ユーザの評価: </span>
       <%= sort_asc("score") %>
       <%= sort_desc("score") %>
